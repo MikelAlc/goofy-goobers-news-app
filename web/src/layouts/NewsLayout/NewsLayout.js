@@ -12,7 +12,7 @@ const NewsLayout = ({ children }) => {
           </h1>
           {isAuthenticated ? (
             <div>
-              <span>Logged in as {currentUser.email}</span>{' '}
+              <span>Logged in as {currentUser.name}</span>{' '}
               <button type="button" onClick={logOut}>
                 Logout
               </button>
@@ -29,7 +29,7 @@ const NewsLayout = ({ children }) => {
             <li>
               <p>Goofy</p>
             </li>
-            
+
           </ul>
         </nav>
       </header>
