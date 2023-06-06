@@ -6,7 +6,7 @@ const LandingPage = () => {
     <>
       <MetaTags title="Landing" description="Landing page" />
 
-      <img src="../../images/atrocity.PNG" alt="A pug napping"></img>
+      <img src="../../images/atrocity.PNG" alt="A pug napping..."></img>
     </>
   )
 }
