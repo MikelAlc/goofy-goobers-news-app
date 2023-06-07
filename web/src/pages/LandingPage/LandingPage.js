@@ -11,7 +11,7 @@ const LandingPage = () => {
       {isAuthenticated ? (
           <div class="display">
             <h3>Meme of the Day</h3><br></br>
-            <img id='meme' src={meme}></img>
+            <img id='meme' src="img/meme.jpg"></img>
           </div>
         ) : (
           <div class="display">

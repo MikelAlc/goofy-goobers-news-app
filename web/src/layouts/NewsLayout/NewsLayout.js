@@ -7,16 +7,11 @@ const NewsLayout = ({ children }) => {
   return (
     <>
       <header>
-        <div class="title">
-          <h1><Link to={routes.landing()}>Goober Gazette</Link></h1>
-          <img id='goober' src={goober} alt="Goofy Goober Logo"></img>
-        </div>
 
-
-        <div className="flex-between">
+        <div className="flex-end">
           {isAuthenticated ? (
-            <div>
-              <span>Logged in as {currentUser.name}</span>{' '}
+            <div className="flex-end">
+              <span>Logged in as {currentUser.name}&nbsp;</span>{' '}
               <button type="button" onClick={logOut}>
                 Logout
               </button>
@@ -25,6 +20,11 @@ const NewsLayout = ({ children }) => {
             <Link to={routes.login()}>Login</Link>
           )}
         </div>
+        <div class="title">
+          <h1><Link to={routes.landing()}>Goober Gazette</Link></h1>
+          <img id='goober' src={goober} alt="Goofy Goober Logo"></img>
+        </div>
+
 
           <nav>
               <Link to={routes.landing()}>Home</Link>

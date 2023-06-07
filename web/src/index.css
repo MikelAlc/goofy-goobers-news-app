@@ -95,3 +95,8 @@ body {
   .flex-between button {
     display: inline;
   }
+
+  .flex-end{
+    display: flex;
+    justify-content: flex-end;
+  }
