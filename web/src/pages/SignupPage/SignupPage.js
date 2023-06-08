@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import { useState } from 'react'
+
 
 import {
   Form,
@@ -7,33 +9,44 @@ import {
   TextField,
   PasswordField,
   FieldError,
-  Submit,
+  useForm,
+   Submit,
 } from '@redwoodjs/forms'
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 
+
+
 const SignupPage = () => {
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [password, setPassword] = useState('')
   const { isAuthenticated, signUp } = useAuth()
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.landing())
+     // navigate(routes.landing())
+     window.location.href = routes.landing()
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, confirmPassword])
 
   // focus on username box on page load
   const usernameRef = useRef(null)
   useEffect(() => {
     usernameRef.current?.focus()
   }, [])
-
-  const onSubmit = async (data) => {
+const formMethods = useForm({
+   onSubmit: async (data) => {
+    if (data.password !== data.confirmPassword) {
+      toast.error('Passwords do not match')
+      return
+    }
     const response = await signUp({
       username: data.username,
       password: data.password,
+
     })
 
     if (response.message) {
@@ -42,10 +55,13 @@ const SignupPage = () => {
       toast.error(response.error)
     } else {
       // user is signed in automatically
+      window.location.href = routes.landing() // go to landing page
       toast.success('Welcome!')
     }
   }
+})
 
+const { handleSubmit } = formMethods;
   return (
     <>
       <MetaTags title="Signup" />
@@ -60,7 +76,7 @@ const SignupPage = () => {
 
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                <Form onSubmit={handleSubmit} className="rw-form-wrapper" formMethods={formMethods}>
                   <Label
                     name="username"
                     className="rw-label"
@@ -73,10 +89,17 @@ const SignupPage = () => {
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
                     ref={usernameRef}
+
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'Username is required',
+                      required: 'username is required',
+
+                      minLength: {
+                        value: 8,
+                        message: 'Username must be at least 8 characters',
+                      },
+                      pattern: {
+                        value: /^[^\s]+$/,//no spaces
+                        message: 'Username cannot contain spaces',
                       },
                     }}
                   />
@@ -94,22 +117,59 @@ const SignupPage = () => {
                     name="password"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                    autoComplete="current-password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'Password is required',
+                      required: 'Password is required',
+
+                      pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])/,
+                        message: 'Password must contain at least one lowercase letter, one uppercase letter, one non-letter',
                       },
                     }}
                   />
 
                   <FieldError name="password" className="rw-field-error" />
+                  <Label
+                    name="confirmPassword"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
 
+                    Confirm Password
+                   </Label>
+
+                   <PasswordField
+                      name="confirmPassword"
+                      className="rw-input"
+                      errorClassName="rw-input rw-input-error"
+                      autoComplete="new-password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      validation={{
+                        required:'Confirm Password is required',
+
+                        validate: {
+                          matchesPreviousPassword: (value) => {
+                            if (value === confirmPassword) {
+                              return true
+                            }
+                            return 'Passwords do not match!'
+                          }
+                        },
+                      }}
+                        />
+                   <FieldError
+                    name="confirmPassword"
+                    className="rw-field-error"
+                  />
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">
                       Sign Up
                     </Submit>
                   </div>
+
                 </Form>
               </div>
             </div>
