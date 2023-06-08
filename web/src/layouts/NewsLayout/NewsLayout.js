@@ -20,7 +20,7 @@ const NewsLayout = ({ children }) => {
             <Link to={routes.login()}>Login</Link>
           )}
         </div>
-        <div class="title">
+        <div className="title">
           <h1><Link to={routes.landing()}>Goober Gazette</Link></h1>
           <img id='goober' src={goober} alt="Goofy Goober Logo"></img>
         </div>
