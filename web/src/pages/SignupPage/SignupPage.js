@@ -19,7 +19,6 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 
 
-
 const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [password, setPassword] = useState('')
@@ -37,8 +36,8 @@ const SignupPage = () => {
   useEffect(() => {
     usernameRef.current?.focus()
   }, [])
-const formMethods = useForm({
-   onSubmit: async (data) => {
+
+  const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
       toast.error('Passwords do not match')
       return
@@ -59,9 +58,9 @@ const formMethods = useForm({
       toast.success('Welcome!')
     }
   }
-})
 
-const { handleSubmit } = formMethods;
+
+
   return (
     <>
       <MetaTags title="Signup" />
@@ -76,7 +75,7 @@ const { handleSubmit } = formMethods;
 
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
-                <Form onSubmit={handleSubmit} className="rw-form-wrapper" formMethods={formMethods}>
+                <Form onSubmit={onSubmit} className="rw-form-wrapper" >
                   <Label
                     name="username"
                     className="rw-label"
@@ -91,7 +90,7 @@ const { handleSubmit } = formMethods;
                     ref={usernameRef}
 
                     validation={{
-                      required: 'username is required',
+                      required: true,
 
                       minLength: {
                         value: 8,
@@ -121,7 +120,7 @@ const { handleSubmit } = formMethods;
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     validation={{
-                      required: 'Password is required',
+                      required: true,
 
                       pattern: {
                         value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])/,
@@ -148,13 +147,15 @@ const { handleSubmit } = formMethods;
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       validation={{
-                        required:'Confirm Password is required',
+                        required:true,
 
                         validate: {
                           matchesPreviousPassword: (value) => {
                             if (value === confirmPassword) {
+                              console.log("Here")
                               return true
                             }
+
                             return 'Passwords do not match!'
                           }
                         },

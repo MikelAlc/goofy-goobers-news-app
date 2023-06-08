@@ -9,12 +9,12 @@ const LandingPage = () => {
       <MetaTags title="Landing" description="Landing page" />
 
       {isAuthenticated ? (
-          <div class="display">
+          <div className="display">
             <h3>Meme of the Day</h3><br></br>
             <img id='meme' src="img/meme.jpg"></img>
           </div>
         ) : (
-          <div class="display">
+          <div className="display">
             <h3>Login to view Meme of the Day</h3>
           </div>
 
