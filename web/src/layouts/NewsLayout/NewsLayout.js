@@ -1,12 +1,16 @@
 import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from 'src/auth'
-import goober from 'web/public/img/goober.png'
+import logo from 'web/public/img/pub_logos.png'
 
 const NewsLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   return (
     <>
       <header>
+      <div class="title">
+          <Link to={routes.landing()}><img id='logo' src={logo} alt="Goofy Goober Logo"></img></Link>
+
+      </div>
 
         <div className="flex-end">
           {isAuthenticated ? (
@@ -20,10 +24,7 @@ const NewsLayout = ({ children }) => {
             <Link to={routes.login()}>Login</Link>
           )}
         </div>
-        <div class="title">
-          <h1><Link to={routes.landing()}>Goober Gazette</Link></h1>
-          <img id='goober' src={goober} alt="Goofy Goober Logo"></img>
-        </div>
+
 
 
           <nav>
