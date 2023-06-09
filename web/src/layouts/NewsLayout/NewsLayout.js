@@ -11,7 +11,6 @@ const NewsLayout = ({ children }) => {
           <Link to={routes.landing()}><img id='logo' src={logo} alt="Goofy Goober Logo"></img></Link>
 
       </div>
-
         <div className="flex-end">
           {isAuthenticated ? (
             <div className="flex-end">
@@ -24,9 +23,6 @@ const NewsLayout = ({ children }) => {
             <Link to={routes.login()}>Login</Link>
           )}
         </div>
-
-
-
           <nav>
               <Link to={routes.landing()}>Home</Link>
               <Link >Sports</Link>
