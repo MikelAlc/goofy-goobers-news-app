@@ -7,14 +7,19 @@ nav {
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color:cornflowerblue;
+  border-top: 1px solid #8e51e4;
+  border-bottom: 1px solid #8e51e4;
   height: 50px;
+}
 
+a:hover{
+  color: #8e51e4;
 }
 
 #logo{
   width: 400px;
   height:auto;
+  margin-top: 10px;
 }
 
 #meme {
