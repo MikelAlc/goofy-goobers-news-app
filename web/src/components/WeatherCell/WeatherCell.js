@@ -2,9 +2,9 @@ export const QUERY = gql`
   query GetWeatherQuery($zip: String!) {
     weather: getWeather(zip: $zip) {
       zip
-      city
-      conditions
-      temp
+      status
+      totalResults
+      articles
     }
   }
 `

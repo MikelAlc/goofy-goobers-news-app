@@ -1,9 +1,10 @@
 export const schema = gql`
   type Weather {
     zip: String!
-    city: String!
-    conditions: String!
-    temp: Int!
+    status: String!
+    totalResults: Int!
+    articles: [String!]!
+
   }
 
   type Query {

@@ -14,7 +14,7 @@ const NewsLayout = ({ children }) => {
         <div className="flex-end">
           {isAuthenticated ? (
             <div className="flex-end">
-              <span>Logged in as {currentUser.name}&nbsp;</span>{' '}
+
               <button type="button" onClick={logOut}>
                 Logout
               </button>
