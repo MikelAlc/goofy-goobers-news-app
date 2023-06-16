@@ -1,7 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useAuth } from 'src/auth'
-import ArticlesCell from 'src/components/ArticlesCell'
+import WeatherCell from 'src/components/WeatherCell'
 
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -20,6 +20,8 @@ const LandingPage = () => {
           </div>
 
         )}
+
+      <WeatherCell zip={'07079'} />
 
 
     </>
