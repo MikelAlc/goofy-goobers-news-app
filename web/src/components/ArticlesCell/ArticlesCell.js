@@ -32,7 +32,8 @@ export const Success = ({ output }) => {
     if (articles[i].title && articles[i].author && articles[i].publishedAt && articles[i].urlToImage){
       articleDivs.push(
       <div className='article-div'>
-        <img className='article-img' src={articles[i].urlToImage} alt={"cover"} width={"500"} height={"300"}></img>
+        <img className='article-img' src={articles[i].urlToImage} width={"500"} height={"300"}></img>
+        <div className='article-img-overlay'></div>
         <p className='article-title'>hello</p>
       </div>)
       // paragraphs.push(<p style={{color: 'red'}}>{articles[i].title.split(" - ")[0]}</p>)
