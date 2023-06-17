@@ -5,14 +5,11 @@ export const getWeather = async ({ zip }) => {
     `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
   )
   const json = await response.json()
-  console.info(json)
+
 
 
   return {
-    zip,
-    status: json.status,
     totalResults: json.totalResults,
     articles: json.articles
-
   }
 }

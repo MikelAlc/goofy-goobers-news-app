@@ -1,10 +1,14 @@
 export const schema = gql`
   type Weather {
-    zip: String!
-    status: String!
     totalResults: Int!
-    articles: [String!]!
+    articles: [Article!]
+  }
 
+  type Article {
+    author: String
+    description: String
+    publishedAt: String!
+    title: String!
   }
 
   type Query {

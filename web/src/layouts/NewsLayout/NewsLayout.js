@@ -7,7 +7,7 @@ const NewsLayout = ({ children }) => {
   return (
     <>
       <header>
-      <div class="title">
+      <div className="title">
           <Link to={routes.landing()}><img id='logo' src={logo} alt="Goofy Goober Logo"></img></Link>
 
       </div>
@@ -15,9 +15,7 @@ const NewsLayout = ({ children }) => {
           {isAuthenticated ? (
             <div className="flex-end">
 
-              <button type="button" onClick={logOut}>
-                Logout
-              </button>
+              <button type="button" onClick={logOut}>Logout</button>
             </div>
           ) : (
             <Link to={routes.login()}>Login</Link>
