@@ -1,5 +1,5 @@
 export const schema = gql`
-  type Weather {
+  type Articles {
     totalResults: Int!
     articles: [Article!]
   }
@@ -12,6 +12,6 @@ export const schema = gql`
   }
 
   type Query {
-    getWeather(zip: String!): Weather! @skipAuth
+    getArticles(zip: String!): Articles! @skipAuth
   }
 `

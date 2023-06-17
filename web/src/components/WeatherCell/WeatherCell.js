@@ -1,12 +1,13 @@
 export const QUERY = gql`
-  query GetWeatherQuery($zip: String!) {
-    output: getWeather(zip: $zip) {
+  query GetArticlesQuery($zip: String!) {
+    output: getArticles(zip: $zip) {
       totalResults
       articles {
         ... on Article {
-          title
+          author
           description
           publishedAt
+          title
         }
       }
     }
@@ -23,21 +24,18 @@ export const Failure = ({ error }) => (
 
 export const Success = ({ output }) => {
   const articles = output.articles
+  const paragraphs = []
 
-  /*  Since the return values are HMTL/React elements themselves with JS
-      in the parenthesis, I can't yet figure out how to generate them with
-      loops.
-   */
+  for (let i = 0; i < articles.length; i++) {
+    if (articles[i].title && articles[i].author && articles[i].publishedAt){
+      paragraphs.push(<p style={{color: 'red'}}>{articles[i].title.split(" - ")[0]}</p>)
+      paragraphs.push(<p>-----{articles[i].author}</p>)
+      paragraphs.push(<p>-----{articles[i].publishedAt}</p>)
+    }
 
-  return (
-    <div>
-      <p>{articles[0].title}</p>
-      <p>{articles[1].title}</p>
-      <p>{articles[2].title}</p>
-      <p>{articles[3].title}</p>
-      <p>{articles[4].title}</p>
-      <p>{articles[5].title}</p>
-      </div>
 
-  )
+  }
+
+
+  return <div>{paragraphs}</div>
 }
