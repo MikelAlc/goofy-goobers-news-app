@@ -30,21 +30,23 @@ export const Success = ({ output }) => {
 
   for (let i = 0; i < articles.length; i++) {
     if (articles[i].title && articles[i].author && articles[i].publishedAt && articles[i].urlToImage){
+      const dateObj = new Date(articles[i].publishedAt)
+      const dateString = dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+
+
       articleDivs.push(
       <div className='article-div'>
-        <img className='article-img' src={articles[i].urlToImage} width={"500"} height={"300"}></img>
+        <img className='article-img' src={articles[i].urlToImage} width={"400"} height={"250"}></img>
         <div className='article-img-overlay'></div>
-        <p className='article-title'>hello</p>
+        <p className='article-title'>{articles[i].title.split(" - ")[0]}</p>
+        <p className='article-details'>{articles[i].author} — {dateString}</p>
       </div>)
-      // paragraphs.push(<p style={{color: 'red'}}>{articles[i].title.split(" - ")[0]}</p>)
-      // paragraphs.push(<p style={{color: 'red'}}>-----{articles[i].author}</p>)
-      // paragraphs.push(<p style={{color: 'red'}}>-----{articles[i].publishedAt}</p>)
-      // paragraphs.push(<img style={{color: 'red'}} src={articles[i].urlToImage} alt={"cover"} width={"500"} height={"300"}></img>)
+
     }
 
 
   }
 
 
-  return <div>{articleDivs}</div>
+  return <div className="articles-cell">{articleDivs}</div>
 }
