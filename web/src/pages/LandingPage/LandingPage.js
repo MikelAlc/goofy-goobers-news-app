@@ -1,7 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useAuth } from 'src/auth'
-import WeatherCell from 'src/components/WeatherCell'
+import ArticlesCell from 'src/components/ArticlesCell'
 
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -13,7 +13,7 @@ const LandingPage = () => {
     <>
       <MetaTags title="Landing" description="Landing page" />
 
-      {isAuthenticated ? (
+      {/* {isAuthenticated ? (
           <div className="display">
             <h3>Meme of the Day</h3><br></br>
             <img id='meme' src="img/meme.jpg"></img>
@@ -23,9 +23,9 @@ const LandingPage = () => {
             <h3>Login to view Meme of the Day</h3>
           </div>
 
-        )}
+        )} */}
 
-      <WeatherCell zip={'07079'} />
+      <ArticlesCell zip={'07079'} />
 
 
     </>

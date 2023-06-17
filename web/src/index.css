@@ -1,3 +1,21 @@
+.article-div {
+  position: relative;
+  text-align: center;
+  width: 500px
+}
+
+.article-title {
+  color: red;
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.article-img {
+  width: 100%;
+}
+
+
 /* for nav bar and links inside */
 
 nav {

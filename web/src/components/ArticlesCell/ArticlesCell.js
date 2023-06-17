@@ -8,6 +8,7 @@ export const QUERY = gql`
           description
           publishedAt
           title
+          urlToImage
         }
       }
     }
@@ -24,18 +25,25 @@ export const Failure = ({ error }) => (
 
 export const Success = ({ output }) => {
   const articles = output.articles
-  const paragraphs = []
+  const articleDivs = []
+
 
   for (let i = 0; i < articles.length; i++) {
-    if (articles[i].title && articles[i].author && articles[i].publishedAt){
-      paragraphs.push(<p style={{color: 'red'}}>{articles[i].title.split(" - ")[0]}</p>)
-      paragraphs.push(<p>-----{articles[i].author}</p>)
-      paragraphs.push(<p>-----{articles[i].publishedAt}</p>)
+    if (articles[i].title && articles[i].author && articles[i].publishedAt && articles[i].urlToImage){
+      articleDivs.push(
+      <div className='article-div'>
+        <img className='article-img' src={articles[i].urlToImage} alt={"cover"} width={"500"} height={"300"}></img>
+        <p className='article-title'>hello</p>
+      </div>)
+      // paragraphs.push(<p style={{color: 'red'}}>{articles[i].title.split(" - ")[0]}</p>)
+      // paragraphs.push(<p style={{color: 'red'}}>-----{articles[i].author}</p>)
+      // paragraphs.push(<p style={{color: 'red'}}>-----{articles[i].publishedAt}</p>)
+      // paragraphs.push(<img style={{color: 'red'}} src={articles[i].urlToImage} alt={"cover"} width={"500"} height={"300"}></img>)
     }
 
 
   }
 
 
-  return <div>{paragraphs}</div>
+  return <div>{articleDivs}</div>
 }
