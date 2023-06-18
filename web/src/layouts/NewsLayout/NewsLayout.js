@@ -14,13 +14,11 @@ const NewsLayout = ({ children }) => {
         <div className="flex-end">
           {isAuthenticated ? (
             <div className="flex-end">
-              <span className='loggedInAs'>Logged in as {currentUser.name}&nbsp;</span>{' '}
-              <button type="button" onClick={logOut} className='rw-button rw-button-blue'>Logout</button>
+              <span>Logged in as {currentUser.name}&nbsp;</span>{' '}
+              <button type="button" onClick={logOut}>Logout</button>
             </div>
           ) : (
-
-            <Link to={routes.login()} className='rw-button rw-button-blue'>Login</Link>
-
+            <Link to={routes.login()}>Login</Link>
           )}
         </div>
           <nav>
