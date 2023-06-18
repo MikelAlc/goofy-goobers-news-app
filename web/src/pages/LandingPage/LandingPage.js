@@ -5,9 +5,9 @@ import ArticlesCell from 'src/components/ArticlesCell'
 
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  fetch('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c')
-    .then(response => response.json())
-    .then(json => console.info(json))
+  // fetch('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c')
+  //   .then(response => response.json())
+  //   .then(json => console.info(json))
 
   return (
     <>
@@ -26,6 +26,7 @@ const LandingPage = () => {
         )} */}
 
       <ArticlesCell zip={'07079'} />
+
 
 
     </>

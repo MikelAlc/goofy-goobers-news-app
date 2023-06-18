@@ -9,6 +9,7 @@ export const schema = gql`
     description: String
     publishedAt: String!
     title: String!
+    content: String
     urlToImage: String
   }
 
