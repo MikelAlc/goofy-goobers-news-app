@@ -7,7 +7,7 @@
   width: 50%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .article-div {
@@ -88,6 +88,12 @@ nav > a {
 
 nav > a:hover{
   color: #fff977;
+}
+
+#refresh-button {
+  width: 150px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 #logo{
@@ -178,4 +184,5 @@ body {
   .flex-end{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
   }

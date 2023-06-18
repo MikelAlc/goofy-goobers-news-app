@@ -11,27 +11,29 @@ const LandingPage = () => {
   //   .then(response => response.json())
   //   .then(json => console.info(json))
 
-  const [zip, setZip] = useState()
+  const [state, changeState] = useState()
+
 
   const onSubmit = () => {
     let dateNow = new Date()
-    setZip(dateNow.toUTCString())
+    changeState(dateNow.toUTCString())
   }
+
 
   return (
     <>
       <MetaTags title="Landing" description="Landing page" />
 
 
-      {/* <Form onSubmit={onSubmit} style={{ fontSize: '2rem' }}>
-        <TextField name="zip" />
-        <Submit>Go</Submit>
-      </Form> */}
+      {/* When the page initially loads, state is falsy, therefore the && will not
+          return a cell. By adding an || and a second operand, the cell will load initially.
+          Any subsequent changes to the state triggered by the button will cause the first operand
+          to be returned from the || since the state becomes truthy. */}
 
-      <button onClick={onSubmit}>hi</button>
-      {zip && <ArticlesCell zip={zip} />}
+      <button id='refresh-button' className='rw-button rw-button-blue' onClick={onSubmit}> Refresh Feed </button>
+      {(state && <ArticlesCell zip={state} />) || <ArticlesCell zip={'07079'} /> }
 
-      {/* <ArticlesCell zip={'07079'} /> */}
+
 
     </>
   )
