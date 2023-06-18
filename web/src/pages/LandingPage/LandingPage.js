@@ -1,7 +1,9 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useAuth } from 'src/auth'
+import { useState } from 'react'
 import ArticlesCell from 'src/components/ArticlesCell'
+import { Form, TextField, Submit } from '@redwoodjs/forms'
 
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -9,25 +11,27 @@ const LandingPage = () => {
   //   .then(response => response.json())
   //   .then(json => console.info(json))
 
+  const [zip, setZip] = useState()
+
+  const onSubmit = () => {
+    let dateNow = new Date()
+    setZip(dateNow.toUTCString())
+  }
+
   return (
     <>
       <MetaTags title="Landing" description="Landing page" />
 
-      {/* {isAuthenticated ? (
-          <div className="display">
-            <h3>Meme of the Day</h3><br></br>
-            <img id='meme' src="img/meme.jpg"></img>
-          </div>
-        ) : (
-          <div className="display">
-            <h3>Login to view Meme of the Day</h3>
-          </div>
 
-        )} */}
+      {/* <Form onSubmit={onSubmit} style={{ fontSize: '2rem' }}>
+        <TextField name="zip" />
+        <Submit>Go</Submit>
+      </Form> */}
 
-      <ArticlesCell zip={'07079'} />
+      <button onClick={onSubmit}>hi</button>
+      {zip && <ArticlesCell zip={zip} />}
 
-
+      {/* <ArticlesCell zip={'07079'} /> */}
 
     </>
   )
