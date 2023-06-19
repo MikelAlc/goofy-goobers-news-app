@@ -9,59 +9,41 @@ import {
 } from '@redwoodjs/forms'
 //import { db } from 'api/db'
 import { useAuth } from 'src/auth'
-import {updateUser} from 'src/graphql/users'
+
+
+
+const UPDATE_CATEGORIES = gql`
+  mutation UpdateCategoriesMutation($id: Int!, $input: UpdateCategories!) {
+    updateCategories(id: $id, input: $input) {
+      id
+    }
+  }
+`
 
 const SettingsPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  //check boxes of current settings here?
+
+  const [update] = useMutation(UPDATE_CATEGORIES)
 
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
-    /*
-    if (data.general==true)
-    updateUser({
-      id: currentUser.id,
-      input: { general: true },
-    })
-    else
-    updateUser({
-      id: currentUser.id,
-      input: { general: false },
-    })
-    */
-    if (data.business==true)
-      currentUser.business=true;
-    else
-      currentUser.business=false;
-    if (data.entertainment==true)
-      currentUser.entertainment=true;
-    else
-      currentUser.entertainment=false;
-    if (data.health==true)
-      currentUser.health=true;
-    else
-      currentUser.health=false;
-   if (data.sports==true)
-      currentUser.sports=true;
-    else
-      currentUser.sports=false;
-    if (data.science==true)
-      currentUser.science=true;
-    else
-      currentUser.science=false;
-    if (data.technology==true)
-      currentUser.technology=true;
-    else
-      currentUser.technology=false;
+    update({variables:{id:currentUser.id, input: data}});
 
   }
+
 
 
   return (
     <>
       <MetaTags title="Settings" description="Settings page" />
+
     <main className="rw-main">
+
+    <div>
+
+
+    </div>
     <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">Select Your Interests</h2>
@@ -76,100 +58,98 @@ const SettingsPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
-                      General
-                  </Label>
-
                   <CheckboxField
                     name="general"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-
-                  />
+                    defaultChecked={currentUser.general}
+                    />
+                      General
+                  </Label>
 
                   <Label
                     name="business"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="business"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.business}
+                    />
                       Business
                   </Label>
 
-                  <CheckboxField
-                    name="business"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="entertainment"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="entertainment"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.entertainment}
+                    />
                       Entertainment
                   </Label>
 
-                  <CheckboxField
-                    name="entertainment"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="health"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="health"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.health}
+                    />
                       Health
                   </Label>
 
-                  <CheckboxField
-                    name="health"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="science"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="science"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.science}
+                    />
                       Science
                   </Label>
 
-                  <CheckboxField
-                    name="science"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="sports"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="sports"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.sports}
+                    />
                       Sports
                   </Label>
 
-                  <CheckboxField
-                    name="sports"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="technology"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
-                      Technology
-                  </Label>
-
                   <CheckboxField
                     name="technology"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                  />
-
+                    defaultChecked={currentUser.technology}
+                    />
+                      Technology
+                  </Label>
 
 
                   <div className="rw-button-group">

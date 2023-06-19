@@ -53,9 +53,20 @@ export const schema = gql`
     technology: Boolean
   }
 
+  input UpdateCategories{
+    general: Boolean
+    business: Boolean
+    entertainment: Boolean
+    health: Boolean
+    science: Boolean
+    sports: Boolean
+    technology: Boolean
+  }
+
   type Mutation {
     createUser(input: CreateUserInput!): User! @requireAuth
     updateUser(id: Int!, input: UpdateUserInput!): User! @requireAuth
+    updateCategories(id: Int!, input: UpdateCategories!): User! @requireAuth
     deleteUser(id: Int!): User! @requireAuth
   }
 `

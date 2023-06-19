@@ -26,7 +26,8 @@ export const getCurrentUser = async (session) => {
 
   return await db.user.findUnique({
     where: { id: session.id },
-    select: { id: true, name:true },
+    select: { id: true, name:true, general: true, business: true, entertainment:true, health: true, science:true,
+    sports: true, technology:true },
   })
 }
 

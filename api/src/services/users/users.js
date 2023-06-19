@@ -23,6 +23,21 @@ export const updateUser = ({ id, input }) => {
   })
 }
 
+export const updateCategories = ({ id, input }) => {
+  return db.user.update({
+    data: {
+      general: input.general,
+      business: input.business,
+      entertainment: input.entertainment,
+      health: input.health,
+      science: input.science,
+      sports: input.sports,
+      technology: input.technology,
+    },
+    where: { id },
+  })
+}
+
 export const deleteUser = ({ id }) => {
   return db.user.delete({
     where: { id },
