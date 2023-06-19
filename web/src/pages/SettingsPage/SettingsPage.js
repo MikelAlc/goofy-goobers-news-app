@@ -7,9 +7,9 @@ import {
   CheckboxField,
   CheckboxFieldProps
 } from '@redwoodjs/forms'
-//import { db } from 'api/db'
+//import { db } from 'src/lib/db'
 import { useAuth } from 'src/auth'
-import {updateUser} from 'src/graphql/users'
+import { users, user, createUser, updateUser, deleteUser } from 'src/services/users/users.js'
 
 const SettingsPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -18,7 +18,7 @@ const SettingsPage = () => {
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
-    /*
+
     if (data.general==true)
     updateUser({
       id: currentUser.id,
@@ -29,7 +29,7 @@ const SettingsPage = () => {
       id: currentUser.id,
       input: { general: false },
     })
-    */
+
     if (data.business==true)
       currentUser.business=true;
     else
