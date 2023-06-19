@@ -18,7 +18,7 @@ const SettingsPage = () => {
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
-
+    /*
     if (data.general==true)
     updateUser({
       id: currentUser.id,
@@ -29,6 +29,7 @@ const SettingsPage = () => {
       id: currentUser.id,
       input: { general: false },
     })
+    */
     if (data.business==true)
       currentUser.business=true;
     else
