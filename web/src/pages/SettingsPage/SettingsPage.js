@@ -1,5 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
+import { MetaTags, useMutation } from '@redwoodjs/web'
 import {
   Form,
   Label,
@@ -7,11 +7,45 @@ import {
   CheckboxField,
   CheckboxFieldProps
 } from '@redwoodjs/forms'
-const SettingsPage = () => {
+//import { db } from 'api/db'
+import { useAuth } from 'src/auth'
 
+const SettingsPage = () => {
+  const { isAuthenticated, currentUser, logOut } = useAuth()
+  //check boxes of current settings here?
 
   const onSubmit = async (data) => {
+    console.log(data);
+    console.log(currentUser.id);
 
+    if (data.general==true)
+      currentUser.general=true;
+    else
+      currentUser.general=false;
+    if (data.business==true)
+      currentUser.business=true;
+    else
+      currentUser.business=false;
+    if (data.entertainment==true)
+      currentUser.entertainment=true;
+    else
+      currentUser.entertainment=false;
+    if (data.health==true)
+      currentUser.health=true;
+    else
+      currentUser.health=false;
+   if (data.sports==true)
+      currentUser.sports=true;
+    else
+      currentUser.sports=false;
+    if (data.science==true)
+      currentUser.science=true;
+    else
+      currentUser.science=false;
+    if (data.technology==true)
+      currentUser.technology=true;
+    else
+      currentUser.technology=false;
 
   }
 
@@ -22,7 +56,8 @@ const SettingsPage = () => {
     <main className="rw-main">
     <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Settings</h2>
+              <h2 className="rw-heading rw-heading-secondary">Select Your Interests</h2>
+              <p className="rw-paragraph">These categories will be applied to your custom feed</p>
             </header>
 
         <div className="rw-segment-main">
@@ -40,7 +75,7 @@ const SettingsPage = () => {
                     name="general"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                    defaultChecked = {true}
+
                   />
 
                   <Label
