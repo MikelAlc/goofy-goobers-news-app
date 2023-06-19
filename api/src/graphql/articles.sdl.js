@@ -11,6 +11,7 @@ export const schema = gql`
     title: String!
     content: String
     urlToImage: String
+    url: String
   }
 
   type Query {

@@ -10,6 +10,7 @@ export const QUERY = gql`
           title
           content
           urlToImage
+          url
         }
       }
     }
@@ -36,13 +37,16 @@ export const Success = ({ output }) => {
 
 
       articleDivs.push(
-      <div className='article-div'>
-        <img className='article-img' src={articles[i].urlToImage} width={"400"} height={"250"}></img>
-        <div className='article-img-overlay'></div>
-        <p className='article-title'>{articles[i].title.split(" - ")[0]}</p>
-        <p className='article-author-time'>{articles[i].author} — {dateString}</p>
-        <p className='article-preview'>{articles[i].content.substring(0, 150) + "..."}</p>
-      </div>)
+      <a href={articles[i].url}>
+        <div className='article-div'>
+          <img className='article-img' src={articles[i].urlToImage} width={"400"} height={"250"}></img>
+          <div className='article-img-overlay'></div>
+          <p className='article-title'>{articles[i].title.split(" - ")[0]}</p>
+          <p className='article-author-time'>{articles[i].author} — {dateString}</p>
+          <p className='article-preview'>{articles[i].content.substring(0, 150) + "..."}</p>
+        </div>
+      </a>
+      )
 
     }
 
