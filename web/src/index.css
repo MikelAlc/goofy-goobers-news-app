@@ -16,6 +16,7 @@
 }
 
 .article-title {
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
   color: white;
   position: absolute;
   margin-top: -250px;
