@@ -9,6 +9,7 @@ import {
 } from '@redwoodjs/forms'
 //import { db } from 'api/db'
 import { useAuth } from 'src/auth'
+import {updateUser} from 'src/graphql/users'
 
 const SettingsPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -19,9 +20,15 @@ const SettingsPage = () => {
     console.log(currentUser.id);
 
     if (data.general==true)
-      currentUser.general=true;
+    updateUser({
+      id: currentUser.id,
+      input: { general: true },
+    })
     else
-      currentUser.general=false;
+    updateUser({
+      id: currentUser.id,
+      input: { general: false },
+    })
     if (data.business==true)
       currentUser.business=true;
     else
