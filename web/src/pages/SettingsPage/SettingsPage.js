@@ -4,7 +4,8 @@ import {
   Form,
   Label,
   Submit,
-  CheckboxField
+  CheckboxField,
+  CheckboxFieldProps
 } from '@redwoodjs/forms'
 const SettingsPage = () => {
 
@@ -39,6 +40,7 @@ const SettingsPage = () => {
                     name="general"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
+                    defaultChecked = {true}
                   />
 
                   <Label
