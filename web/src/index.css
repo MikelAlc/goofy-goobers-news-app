@@ -2,12 +2,9 @@
 
 .articles-cell{
   display: grid;
-  grid-template-columns: repeat(3, 400px);
-  gap: 10px;
-  width: 50%;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  margin:auto;
+  box-sizing: border-box;
 }
 
 .article-div {
@@ -15,6 +12,7 @@
   text-align: left;
   width: 400px;
   border: 2px solid #8e51e4;
+  margin-top: 10px;
 }
 
 .article-title {
