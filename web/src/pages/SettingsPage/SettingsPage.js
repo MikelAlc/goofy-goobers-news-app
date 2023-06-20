@@ -28,10 +28,13 @@ const SettingsPage = () => {
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
-    update({variables:{id:currentUser.id, input: data}});
-
-    if (selectionMade==true){
-      window.location.href = routes.landing()
+    //selection detection
+    for (const property in data){
+      console.log(`${property}: ${data[property]}`);
+      if (data[property] == true){
+        update({variables:{id:currentUser.id, input: data}});
+        window.location.href = routes.landing();
+      }
     }
 
   }
@@ -155,7 +158,7 @@ const SettingsPage = () => {
                       Technology
                   </Label>
 
-
+                  <div className = "rw-label"><strong>AT LEAST ONE SELECTION IS REQUIRED. You will be redirected to your home page upon success or cancellation.</strong></div>
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">Apply</Submit>
                     <Link to={routes.landing()} className="rw-button rw-button-red">CANCEL</Link>
