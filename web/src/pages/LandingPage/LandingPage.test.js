@@ -1,4 +1,4 @@
-import { render } from '@redwoodjs/testing/web'
+import { render, screen } from '@redwoodjs/testing/web'
 
 import LandingPage from './LandingPage'
 
@@ -10,5 +10,11 @@ describe('LandingPage', () => {
     expect(() => {
       render(<LandingPage />)
     }).not.toThrow()
+  })
+
+  it('Has refresh button',  () => {
+    render(<LandingPage />)
+    expect(screen.getByRole('button', {id: "refresh-button"})).toBeInTheDocument()
+
   })
 })

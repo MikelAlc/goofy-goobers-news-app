@@ -38,7 +38,7 @@ export const Success = ({ output }) => {
 
 
       articleDivs.push(
-      <a href={articles[i].url}>
+      <a href={articles[i].url} key={i}>
         <div className='article-div'>
           <img className='article-img' src={articles[i].urlToImage} width={"400"} height={"250"}></img>
           <div className='article-img-overlay'></div>
