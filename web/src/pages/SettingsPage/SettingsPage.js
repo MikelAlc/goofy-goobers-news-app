@@ -9,17 +9,11 @@ import {
 } from '@redwoodjs/forms'
 //import { db } from 'src/lib/db'
 import { useAuth } from 'src/auth'
-import { users, user, createUser, updateUser, deleteUser } from 'src/services/users/users.js'
+//import { users, user, createUser, updateUser, deleteUser } from 'src/services/users/users.js'
 
 const SettingsPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  //check boxes of current settings here?
-
-  const onSubmit = async (data) => {
-    console.log(data);
-    console.log(currentUser.id);
-
-    if (data.general==true)
+  /*if (data.general==true)
     updateUser({
       id: currentUser.id,
       input: { general: true },
@@ -29,31 +23,105 @@ const SettingsPage = () => {
       id: currentUser.id,
       input: { general: false },
     })
+*/
+/*
+var selectionMade = false;
+if (data.general==true)
+  selectionMade = true;
 
-    if (data.business==true)
-      currentUser.business=true;
-    else
+if (data.business==true)
+  selectionMade = true;
+
+if (data.entertainment==true)
+  selectionMade = true;
+
+if (data.health==true)
+  selectionMade = true;
+
+if (data.sports==true)
+  selectionMade = true;
+
+if (data.science==true)
+  selectionMade = true;
+
+if (data.technology==true)
+  selectionMade = true;
+
+if (selectionMade==false){
+  // display must select one message
+}
+*/
+  const onSubmit = async (data) => {
+    console.log(data);
+    console.log(currentUser.id);
+    var selectionMade = false;
+if (data.general==true)
+  selectionMade = true;
+
+if (data.business==true)
+  selectionMade = true;
+
+if (data.entertainment==true)
+  selectionMade = true;
+
+if (data.health==true)
+  selectionMade = true;
+
+if (data.sports==true)
+  selectionMade = true;
+
+if (data.science==true)
+  selectionMade = true;
+
+if (data.technology==true)
+  selectionMade = true;
+
+if (selectionMade==false){
+  // display must select one message
+}
+    if (data.general==true){
+      selectionMade = true;
+      currentUser.general=true;
+    }
+    else if(selectionMade==true){
+      currentUser.general=false;
+      console.log("no more general");
+    }
+
+    if (data.business==true){
+      selectionMade = true;
+      currentUser.business=true;}
+    else if(selectionMade==true)
       currentUser.business=false;
-    if (data.entertainment==true)
-      currentUser.entertainment=true;
-    else
+    if (data.entertainment==true){
+      selectionMade = true;
+      currentUser.entertainment=true;}
+    else if(selectionMade==true)
       currentUser.entertainment=false;
-    if (data.health==true)
-      currentUser.health=true;
-    else
+    if (data.health==true){
+      selectionMade = true;
+      currentUser.health=true;}
+    else if(selectionMade==true)
       currentUser.health=false;
-   if (data.sports==true)
-      currentUser.sports=true;
-    else
+   if (data.sports==true){
+      selectionMade = true;
+      currentUser.sports=true;}
+    else if(selectionMade==true)
       currentUser.sports=false;
-    if (data.science==true)
-      currentUser.science=true;
-    else
+    if (data.science==true){
+      selectionMade = true;
+      currentUser.science=true;}
+    else if(selectionMade==true)
       currentUser.science=false;
-    if (data.technology==true)
-      currentUser.technology=true;
-    else
+    if (data.technology==true){
+      selectionMade = true;
+      currentUser.technology=true;}
+    else if(selectionMade==true)
       currentUser.technology=false;
+
+    if (selectionMade==true){
+      window.location.href = routes.landing()
+    }
 
   }
 
@@ -170,7 +238,7 @@ const SettingsPage = () => {
                     errorClassName="rw-input rw-input-error"
                   />
 
-
+                  <div>AT LEAST ONE SELECTION IS REQUIRED, YOU WILL BE REDIRECTED TO YOUR HOME PAGE UPON SUCCESS</div>
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">Apply</Submit>
