@@ -8,10 +8,7 @@ import { flattenSearchParams } from '@redwoodjs/router/dist/util'
 
 describe('SettingsPage', () => {
   it('renders successfully', async () => {
-
-    mockGraphQLQuery('getCurrentUser', () => {
-      return {
-        currentUser: {
+    const currentUser= {
           id: 1,
           name: 'Tester',
           general: true,
@@ -22,11 +19,11 @@ describe('SettingsPage', () => {
           sports: false,
           technology: false,
         }
-      }
-    })
+
+        mockCurrentUser(currentUser)
 
     expect(() => {
-      render(await <SettingsPage />)
+      render( <SettingsPage />)
     }).not.toThrow()
   })
 })
