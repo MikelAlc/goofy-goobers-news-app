@@ -1,3 +1,70 @@
+/* article related styling */
+
+.articles-cell{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin:auto;
+  box-sizing: border-box;
+}
+
+.article-div {
+  position: relative;
+  text-align: left;
+  width: 400px;
+  border: 2px solid #8e51e4;
+  margin-top: 10px;
+}
+
+.article-title {
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+  color: white;
+  position: absolute;
+  margin-top: -250px;
+  bottom: 55px;
+  left: 16px;
+  right: 16px;
+  font-family: 'Tahoma';
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.article-author-time {
+  color: white;
+  position: absolute;
+  margin-top: -250px;
+  bottom: 42px;
+  left: 16px;
+  right: 16px;
+  font-family: 'Tahoma';
+  font-size: 12px;
+}
+
+.article-preview {
+  color: rgb(168, 168, 168);
+  position: absolute;
+  margin-top: -250px;
+  bottom: -5px;
+  left: 16px;
+  right: 16px;
+  font-family: 'Tahoma';
+  font-style: italic;
+  font-size: 12px;
+}
+
+
+.article-img {
+  width: 100%;
+}
+
+.article-img-overlay {
+  position: relative;
+  margin-top: -254px;
+  width: 400px;
+  height: 250px;
+  background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(255,0,0,0), rgba(0,0,0,1));
+}
+
+
 /* for nav bar and links inside */
 
 nav {
@@ -7,14 +74,31 @@ nav {
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color:cornflowerblue;
+  /* border-top: 2px solid #8e51e4;
+  border-bottom: 2px solid #8e51e4; */
+  background-color: #8e51e4;
+  margin-top: 5px;
   height: 50px;
-
 }
 
-#goober {
-  width: 100px;
+nav > a {
+  color: white;
+}
+
+nav > a:hover{
+  color: #fff977;
+}
+
+#refresh-button {
+  width: 150px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#logo{
+  width: 400px;
   height:auto;
+  margin-top: 10px;
 }
 
 #meme {
@@ -99,4 +183,5 @@ body {
   .flex-end{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
   }
