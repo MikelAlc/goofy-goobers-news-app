@@ -9,7 +9,7 @@ import {
 } from '@redwoodjs/forms'
 //import { db } from 'src/lib/db'
 import { useAuth } from 'src/auth'
-
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
 
 const UPDATE_CATEGORIES = gql`
@@ -24,22 +24,40 @@ const SettingsPage = () => {
 
   const { isAuthenticated, currentUser, logOut } = useAuth()
 
-  const [update] = useMutation(UPDATE_CATEGORIES)
+  const [update,{loading,error}] = useMutation(UPDATE_CATEGORIES, {onCompleted: () => { toast.success('Preferences Updated');}})
+
+
+
 
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
-    //selection detection
-    for (const property in data){
+    let hasSelection = false; // Track if at least one category is selected
+
+    // Selection detection
+    for (const property in data) {
       console.log(`${property}: ${data[property]}`);
-      if (data[property] == true){
-        update({variables:{id:currentUser.id, input: data}});
-        location.reload();
-        //would be nice to play a short animation saying settings applied or displat a window for 2 seconds saying applied now redirecting
-        window.location.href = routes.landing();
+      if (data[property] === true) {
+        hasSelection = true;
+        break; // Exit the loop if at least one category is selected
       }
     }
 
+    if (hasSelection) {
+      update({ variables: { id: currentUser.id, input: data } });
+
+      // Display success toast
+
+
+      // Delay the page reload for 2 seconds (adjust the delay as needed)
+      setTimeout(() => {
+        location.reload();
+        window.location.href = routes.landing();
+      }, 1000);
+    } else {
+      // Display error toast only once if no categories are selected
+      toast.error('At least one category is required');
+    }
   }
 
 
@@ -49,7 +67,7 @@ const SettingsPage = () => {
       <MetaTags title="Settings" description="Settings page" />
 
     <main className="rw-main">
-
+    <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
     <div>
 
 
@@ -163,8 +181,8 @@ const SettingsPage = () => {
 
                   <div className = "rw-label"><strong>AT LEAST ONE SELECTION IS REQUIRED. You will be redirected to your home page upon success or cancellation.</strong></div>
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Apply</Submit>
                     <Link to={routes.landing()} className="rw-button rw-button-red">CANCEL</Link>
+                    <Submit className="rw-button rw-button-blue">Apply</Submit>
                   </div>
 
                 </Form>
