@@ -7,7 +7,7 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route, Set } from '@redwoodjs/router'
+import { Private, Router, Route, Set } from '@redwoodjs/router'
 import NewsLayout from 'src/layouts/NewsLayout'
 
 import { useAuth } from './auth'
@@ -21,7 +21,9 @@ const Routes = () => {
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={NewsLayout}>
         <Route path="/" page={LandingPage} name="landing" />
-        <Route path="/settings" page={SettingsPage} name="settings" />
+        <Private unauthenticated="landing">
+          <Route path="/settings" page={SettingsPage} name="settings" />
+        </Private>
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
