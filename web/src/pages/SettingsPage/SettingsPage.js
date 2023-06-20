@@ -21,6 +21,7 @@ const UPDATE_CATEGORIES = gql`
 `
 
 const SettingsPage = () => {
+
   const { isAuthenticated, currentUser, logOut } = useAuth()
 
   const [update] = useMutation(UPDATE_CATEGORIES)
@@ -33,6 +34,8 @@ const SettingsPage = () => {
       console.log(`${property}: ${data[property]}`);
       if (data[property] == true){
         update({variables:{id:currentUser.id, input: data}});
+        location.reload();
+        //would be nice to play a short animation saying settings applied or displat a window for 2 seconds saying applied now redirecting
         window.location.href = routes.landing();
       }
     }
