@@ -9,85 +9,26 @@ import {
 } from '@redwoodjs/forms'
 //import { db } from 'src/lib/db'
 import { useAuth } from 'src/auth'
-//import { users, user, createUser, updateUser, deleteUser } from 'src/services/users/users'
+
+
+
+const UPDATE_CATEGORIES = gql`
+  mutation UpdateCategoriesMutation($id: Int!, $input: UpdateCategories!) {
+    updateCategories(id: $id, input: $input) {
+      id
+    }
+  }
+`
 
 const SettingsPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  /*if (data.general==true)
-    updateUser({
-      id: currentUser.id,
-      input: { general: true },
-    })
-    else
-    updateUser({
-      id: currentUser.id,
-      input: { general: false },
-    })
-*/
+
+  const [update] = useMutation(UPDATE_CATEGORIES)
+
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
-    var selectionMade = false;
-  if (data.general==true)
-    selectionMade = true;
-
-  if (data.business==true)
-    selectionMade = true;
-
-  if (data.entertainment==true)
-    selectionMade = true;
-
-  if (data.health==true)
-    selectionMade = true;
-
-  if (data.sports==true)
-    selectionMade = true;
-
-  if (data.science==true)
-    selectionMade = true;
-
-  if (data.technology==true)
-    selectionMade = true;
-
-    if (data.general==true){
-      selectionMade = true;
-      currentUser.general=true;
-    }
-    else if(selectionMade==true){
-      currentUser.general=false;
-      console.log("no more general");
-    }
-
-    if (data.business==true){
-      selectionMade = true;
-      currentUser.business=true;}
-    else if(selectionMade==true)
-      currentUser.business=false;
-    if (data.entertainment==true){
-      selectionMade = true;
-      currentUser.entertainment=true;}
-    else if(selectionMade==true)
-      currentUser.entertainment=false;
-    if (data.health==true){
-      selectionMade = true;
-      currentUser.health=true;}
-    else if(selectionMade==true)
-      currentUser.health=false;
-   if (data.sports==true){
-      selectionMade = true;
-      currentUser.sports=true;}
-    else if(selectionMade==true)
-      currentUser.sports=false;
-    if (data.science==true){
-      selectionMade = true;
-      currentUser.science=true;}
-    else if(selectionMade==true)
-      currentUser.science=false;
-    if (data.technology==true){
-      selectionMade = true;
-      currentUser.technology=true;}
-    else if(selectionMade==true)
-      currentUser.technology=false;
+    update({variables:{id:currentUser.id, input: data}});
 
     if (selectionMade==true){
       window.location.href = routes.landing()
@@ -96,10 +37,17 @@ const SettingsPage = () => {
   }
 
 
+
   return (
     <>
       <MetaTags title="Settings" description="Settings page" />
+
     <main className="rw-main">
+
+    <div>
+
+
+    </div>
     <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">Select Your Interests</h2>
@@ -114,101 +62,99 @@ const SettingsPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
-                      General
-                  </Label>
-
                   <CheckboxField
                     name="general"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-
-                  />
+                    defaultChecked={currentUser.general}
+                    />
+                      General
+                  </Label>
 
                   <Label
                     name="business"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="business"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.business}
+                    />
                       Business
                   </Label>
 
-                  <CheckboxField
-                    name="business"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="entertainment"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="entertainment"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.entertainment}
+                    />
                       Entertainment
                   </Label>
 
-                  <CheckboxField
-                    name="entertainment"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="health"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="health"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.health}
+                    />
                       Health
                   </Label>
 
-                  <CheckboxField
-                    name="health"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="science"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="science"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.science}
+                    />
                       Science
                   </Label>
 
-                  <CheckboxField
-                    name="science"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="sports"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
+                  <CheckboxField
+                    name="sports"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    defaultChecked={currentUser.sports}
+                    />
                       Sports
                   </Label>
 
-                  <CheckboxField
-                    name="sports"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                  />
-
                   <Label
                     name="technology"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                     >
-                      Technology
-                  </Label>
-
                   <CheckboxField
                     name="technology"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                  />
+                    defaultChecked={currentUser.technology}
+                    />
+                      Technology
+                  </Label>
 
-                  <div>AT LEAST ONE SELECTION IS REQUIRED. You will be redirected to your home page upon success or cancellation.</div>
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">Apply</Submit>
