@@ -50,4 +50,6 @@ describe('ArticlesCell', () => {
       render(<Success output={output} />)
     }).not.toThrow()
   })
+
+
 })
