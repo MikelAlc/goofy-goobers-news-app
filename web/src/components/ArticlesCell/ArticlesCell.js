@@ -1,4 +1,5 @@
 export const QUERY = gql`
+
   query GetArticlesQuery($zip: String!) {
     output: getArticles(zip: $zip) {
       totalResults
@@ -56,3 +57,4 @@ export const Success = ({ output }) => {
   //  react can display an array of components
   return <div className="articles-cell">{articleDivs}</div>
 }
+
