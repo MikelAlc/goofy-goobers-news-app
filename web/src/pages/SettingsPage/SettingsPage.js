@@ -24,33 +24,6 @@ const SettingsPage = () => {
       input: { general: false },
     })
 */
-/*
-var selectionMade = false;
-if (data.general==true)
-  selectionMade = true;
-
-if (data.business==true)
-  selectionMade = true;
-
-if (data.entertainment==true)
-  selectionMade = true;
-
-if (data.health==true)
-  selectionMade = true;
-
-if (data.sports==true)
-  selectionMade = true;
-
-if (data.science==true)
-  selectionMade = true;
-
-if (data.technology==true)
-  selectionMade = true;
-
-if (selectionMade==false){
-  // display must select one message
-}
-*/
   const onSubmit = async (data) => {
     console.log(data);
     console.log(currentUser.id);
@@ -76,9 +49,6 @@ if (data.science==true)
 if (data.technology==true)
   selectionMade = true;
 
-if (selectionMade==false){
-  // display must select one message
-}
     if (data.general==true){
       selectionMade = true;
       currentUser.general=true;
