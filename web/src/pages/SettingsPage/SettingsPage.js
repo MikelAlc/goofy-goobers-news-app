@@ -242,7 +242,9 @@ if (selectionMade==false){
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">Apply</Submit>
+                    <Link to={routes.landing()} className="rw-button rw-button-red">CANCEL</Link>
                   </div>
+
                 </Form>
                </div>
             </div>
