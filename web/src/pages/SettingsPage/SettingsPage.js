@@ -9,7 +9,7 @@ import {
 } from '@redwoodjs/forms'
 //import { db } from 'src/lib/db'
 import { useAuth } from 'src/auth'
-//import { users, user, createUser, updateUser, deleteUser } from 'src/services/users/users.js'
+//import { users, user, createUser, updateUser, deleteUser } from 'src/services/users/users'
 
 const SettingsPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -28,26 +28,26 @@ const SettingsPage = () => {
     console.log(data);
     console.log(currentUser.id);
     var selectionMade = false;
-if (data.general==true)
-  selectionMade = true;
+  if (data.general==true)
+    selectionMade = true;
 
-if (data.business==true)
-  selectionMade = true;
+  if (data.business==true)
+    selectionMade = true;
 
-if (data.entertainment==true)
-  selectionMade = true;
+  if (data.entertainment==true)
+    selectionMade = true;
 
-if (data.health==true)
-  selectionMade = true;
+  if (data.health==true)
+    selectionMade = true;
 
-if (data.sports==true)
-  selectionMade = true;
+  if (data.sports==true)
+    selectionMade = true;
 
-if (data.science==true)
-  selectionMade = true;
+  if (data.science==true)
+    selectionMade = true;
 
-if (data.technology==true)
-  selectionMade = true;
+  if (data.technology==true)
+    selectionMade = true;
 
     if (data.general==true){
       selectionMade = true;
@@ -208,7 +208,7 @@ if (data.technology==true)
                     errorClassName="rw-input rw-input-error"
                   />
 
-                  <div>AT LEAST ONE SELECTION IS REQUIRED, YOU WILL BE REDIRECTED TO YOUR HOME PAGE UPON SUCCESS</div>
+                  <div>AT LEAST ONE SELECTION IS REQUIRED. You will be redirected to your home page upon success or cancellation.</div>
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">Apply</Submit>
