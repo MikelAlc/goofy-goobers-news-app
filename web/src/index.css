@@ -5,6 +5,7 @@
   grid-template-columns: repeat(3, 1fr);
   margin:auto;
   box-sizing: border-box;
+  margin-left: 5%;
 }
 
 .article-div {
@@ -96,9 +97,10 @@ nav > a:hover{
 }
 
 #logo{
-  width: 400px;
+  width: 320px;
   height:auto;
   margin-top: 10px;
+  margin-bottom: -8%;
 }
 
 #meme {

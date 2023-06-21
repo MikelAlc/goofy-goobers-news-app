@@ -23,8 +23,13 @@ const NewsLayout = ({ children }) => {
         </div>
           <nav>
               <Link to={routes.landing()}>Home</Link>
-              <Link >Sports</Link>
+              <Link >General</Link>
               <Link >Business</Link>
+              <Link >Entertainment</Link>
+              <Link >Health</Link>
+              <Link >Science</Link>
+              <Link >Sports</Link>
+              <Link >Technology</Link>
               {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
           </nav>
 

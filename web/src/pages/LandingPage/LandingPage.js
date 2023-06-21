@@ -31,7 +31,7 @@ const LandingPage = () => {
           Any subsequent changes to the state triggered by the button will cause the first operand
           to be returned from the || since the state becomes truthy. */}
 
-      <button id='refresh-button' className='rw-button rw-button-blue' onClick={onSubmit}> Refresh Feed </button>
+      {/*<button id='refresh-button' className='rw-button rw-button-blue' onClick={onSubmit}> Refresh Feed </button>*/}
       {(state && <ArticlesCell zip={state} />) || <ArticlesCell zip={'07079'} /> }
 
 
