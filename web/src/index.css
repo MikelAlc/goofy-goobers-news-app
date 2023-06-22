@@ -14,7 +14,9 @@
   width: 400px;
   border: 2px solid #8e51e4;
   margin-top: 10px;
+  overflow: hidden;
 }
+
 
 .article-title {
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;

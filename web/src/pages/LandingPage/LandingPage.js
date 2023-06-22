@@ -10,6 +10,8 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
+  console.log(currentUser)
+
 
   const onSubmit = () => {
     let dateNow = new Date()
@@ -28,7 +30,23 @@ const LandingPage = () => {
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
       {/*<button id='refresh-button' className='rw-button rw-button-blue' onClick={onSubmit}> Refresh Feed </button>*/}
-      {(state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
+      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
+
+
+      {/* All instances of 'zip' have been changed to 'criteria'.
+      This string will determine what articles are shown on the page.
+      It can be parsed in articles.js to:
+        (1) show articles based on categories from user settings
+        (2) show articles based on search bar input
+
+      However it may not work for showing articles from the nav bar,
+      since the nav bar is in NewsLayout.js and not here.
+
+      We can also add another param besides 'criteria' that will help with pagination.
+      The ArticlesCell should change depending on which page the user wants to view.
+
+      - Ty'rese
+        */}
 
 
 
