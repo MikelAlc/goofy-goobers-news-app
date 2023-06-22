@@ -2,6 +2,8 @@ import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from 'src/auth'
 import logo from 'web/public/img/pub_logos.png'
 
+const testVar = 'hi'
+
 const NewsLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   return (
