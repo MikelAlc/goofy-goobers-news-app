@@ -21,6 +21,35 @@ const LandingPage = () => {
 
   return (
     <>
+
+      <header>
+        <div className="title">
+            <Link to={routes.landing()}><img id='logo' src={logo} alt="Goofy Goober Logo"></img></Link>
+        </div>
+          <div className="flex-end">
+            {isAuthenticated ? (
+              <div className="flex-end">
+                <span>Logged in as {currentUser.name}&nbsp;</span>{' '}
+                <button type="button" onClick={logOut} className='rw-button rw-button-blue'>Logout</button>
+              </div>
+            ) : (
+              <Link to={routes.login()} className='rw-button rw-button-blue'>Login</Link>
+            )}
+          </div>
+            <nav>
+                <Link to={routes.landing()}>Home</Link>
+                <Link >General</Link>
+                <Link >Business</Link>
+                <Link >Entertainment</Link>
+                <Link >Health</Link>
+                <Link >Science</Link>
+                <Link >Sports</Link>
+                <Link >Technology</Link>
+                {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
+            </nav>
+      </header>
+
+
       <MetaTags title="Landing" description="Landing page" />
 
 
@@ -29,7 +58,6 @@ const LandingPage = () => {
           Any subsequent changes to the state triggered by the button will cause the first operand
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
-      {/*<button id='refresh-button' className='rw-button rw-button-blue' onClick={onSubmit}> Refresh Feed </button>*/}
       { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
 
 
@@ -38,12 +66,7 @@ const LandingPage = () => {
       It can be parsed in articles.js to:
         (1) show articles based on categories from user settings
         (2) show articles based on search bar input
-
-      However it may not work for showing articles from the nav bar,
-      since the nav bar is in NewsLayout.js and not here.
-
-      We can also add another param besides 'criteria' that will help with pagination.
-      The ArticlesCell should change depending on which page the user wants to view.
+        (3) show articles from a category in the nav bar
 
       - Ty'rese
         */}

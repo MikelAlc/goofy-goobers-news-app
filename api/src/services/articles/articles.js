@@ -10,9 +10,6 @@ export const getArticles = async ({ criteria }) => {
     `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&apiKey=ba6325d8cd694530bee9199d481a3861`
   )
 
-  const response2 = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=ba6325d8cd694530bee9199d481a3861`
-  )
 
   const json = await response.json()
 
