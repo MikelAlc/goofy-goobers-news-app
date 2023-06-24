@@ -3,6 +3,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { useAuth } from 'src/auth'
 import { useState } from 'react'
 import ArticlesCell from 'src/components/ArticlesCell'
+import logo from 'web/public/img/pub_logos.png'
 import { Form, TextField, Submit } from '@redwoodjs/forms'
 
 
@@ -10,17 +11,17 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
-  console.log(currentUser)
 
-
-  const onSubmit = () => {
-    let dateNow = new Date()
-    changeState(dateNow.toUTCString())
+  const setCategory = (event) => { // switch category, select proper tab
+    // event.target.style.color = '#fa9dec'
+    changeState(event.target.id) // the state will be the category itself, except 'home'
   }
 
 
   return (
     <>
+
+      {/* nav bar moved here for ease of use with article selection */}
 
       <header>
         <div className="title">
@@ -37,14 +38,14 @@ const LandingPage = () => {
             )}
           </div>
             <nav>
-                <Link to={routes.landing()}>Home</Link>
-                <Link >General</Link>
-                <Link >Business</Link>
-                <Link >Entertainment</Link>
-                <Link >Health</Link>
-                <Link >Science</Link>
-                <Link >Sports</Link>
-                <Link >Technology</Link>
+                <Link id='home' >Home</Link>
+                <Link id='general' onClick={setCategory}>General</Link>
+                <Link id='business' onClick={setCategory}>Business</Link>
+                <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
+                <Link id='health' onClick={setCategory}>Health</Link>
+                <Link id='science' onClick={setCategory}>Science</Link>
+                <Link id='sports' onClick={setCategory}>Sports</Link>
+                <Link id='technology' onClick={setCategory}>Technology</Link>
                 {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
             </nav>
       </header>
@@ -52,13 +53,12 @@ const LandingPage = () => {
 
       <MetaTags title="Landing" description="Landing page" />
 
-
       {/* When the page initially loads, state is falsy, therefore the && will not
           return a cell. By adding an || and a second operand, the cell will load initially.
           Any subsequent changes to the state triggered by the button will cause the first operand
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
-      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
+      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'business'} /> }
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.
