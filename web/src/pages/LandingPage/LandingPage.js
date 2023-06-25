@@ -7,13 +7,19 @@ import logo from 'web/public/img/pub_logos.png'
 import { Form, TextField, Submit } from '@redwoodjs/forms'
 
 
+
+
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
-
   const setCategory = (event) => { // switch category, select proper tab
-    // event.target.style.color = '#fa9dec'
+    const categories = document.getElementsByClassName('categories')
+
+    for (let i=0; i<categories.length; i++) // reset all links to white
+      categories[i].style.color = 'white'
+    event.target.style.color = '#fa9dec' // set clicked clicked to pink
+
     changeState(event.target.id) // the state will be the category itself, except 'home'
   }
 
@@ -38,14 +44,14 @@ const LandingPage = () => {
             )}
           </div>
             <nav>
-                <Link id='home' >Home</Link>
-                <Link id='general' onClick={setCategory}>General</Link>
-                <Link id='business' onClick={setCategory}>Business</Link>
-                <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
-                <Link id='health' onClick={setCategory}>Health</Link>
-                <Link id='science' onClick={setCategory}>Science</Link>
-                <Link id='sports' onClick={setCategory}>Sports</Link>
-                <Link id='technology' onClick={setCategory}>Technology</Link>
+                <Link to={routes.landing()} id='home' className='categories'>Home</Link>
+                <Link to={routes.landing()} id='general' className='categories' onClick={setCategory}>General</Link>
+                <Link to={routes.landing()} id='business' className='categories' onClick={setCategory}>Business</Link>
+                <Link to={routes.landing()} id='entertainment' className='categories' onClick={setCategory}>Entertainment</Link>
+                <Link to={routes.landing()} id='health' className='categories' onClick={setCategory}>Health</Link>
+                <Link to={routes.landing()} id='science' className='categories' onClick={setCategory}>Science</Link>
+                <Link to={routes.landing()} id='sports' className='categories' onClick={setCategory}>Sports</Link>
+                <Link to={routes.landing()} id='technology' className='categories' onClick={setCategory}>Technology</Link>
                 {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
             </nav>
       </header>
@@ -55,10 +61,10 @@ const LandingPage = () => {
 
       {/* When the page initially loads, state is falsy, therefore the && will not
           return a cell. By adding an || and a second operand, the cell will load initially.
-          Any subsequent changes to the state triggered by the button will cause the first operand
+          Any subsequent changes to the state will cause the first operand
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
-      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'business'} /> }
+      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.
