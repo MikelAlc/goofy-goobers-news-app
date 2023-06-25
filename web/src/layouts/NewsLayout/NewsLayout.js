@@ -2,6 +2,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from 'src/auth'
 import logo from 'web/public/img/pub_logos.png'
 
+
 const NewsLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   return (
@@ -23,8 +24,13 @@ const NewsLayout = ({ children }) => {
         </div>
           <nav>
               <Link to={routes.landing()}>Home</Link>
-              <Link >Sports</Link>
+              <Link >General</Link>
               <Link >Business</Link>
+              <Link >Entertainment</Link>
+              <Link >Health</Link>
+              <Link >Science</Link>
+              <Link >Sports</Link>
+              <Link >Technology</Link>
               {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
           </nav>
 

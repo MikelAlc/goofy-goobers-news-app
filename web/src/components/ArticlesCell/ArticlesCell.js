@@ -1,7 +1,7 @@
 export const QUERY = gql`
 
-  query GetArticlesQuery($zip: String!) {
-    output: getArticles(zip: $zip) {
+  query GetArticlesQuery($criteria: String!) {
+    output: getArticles(criteria: $criteria) {
       totalResults
       articles {
         ... on Article {
@@ -40,10 +40,10 @@ export const Success = ({ output }) => {
       articleDivs.push(
       <a href={articles[i].url} key={i}>
         <div className='article-div'>
-          <img className='article-img' src={articles[i].urlToImage} width={"400"} height={"250"}></img>
+          <img className='article-img' src={articles[i].urlToImage} width={"500"} height={"250"}></img>
           <div className='article-img-overlay'></div>
           <p className='article-title'>{articles[i].title.split(" - ")[0]}</p>
-          <p className='article-author-time'>{articles[i].author} — {dateString}</p>
+          <p className='article-author-time'>{articles[i].author.substring(0, 32) + "..."} — {dateString}</p>
           <p className='article-preview'>{articles[i].content.substring(0, 150) + "..."}</p>
         </div>
       </a>
