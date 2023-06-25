@@ -27,6 +27,13 @@ const LandingPage = () => {
         <div className="title">
             <Link to={routes.landing()}><img id='logo' src={logo} alt="Goofy Goober Logo"></img></Link>
         </div>
+         <div className='form-container'>
+          <div>
+            <Form className='form-inline'>
+              <TextField name="input" className='text-field'/>
+              <Submit  className='rw-button rw-button-blue'>Search</Submit>
+           </Form>
+          </div>
           <div className="flex-end">
             {isAuthenticated ? (
               <div className="flex-end">
@@ -37,37 +44,38 @@ const LandingPage = () => {
               <Link to={routes.login()} className='rw-button rw-button-blue'>Login</Link>
             )}
           </div>
-            <nav>
-              <ul>
-                <li>
-                  <Link id='home' className='nav-button'>Home</Link>
-                </li>
-                <li>
-                    <Link id='general' className='nav-button' onClick={setCategory}>General</Link>
-                </li>
-                <li>
-                    <Link id='business' onClick={setCategory}>Business</Link>
-                </li>
-                <li>
-                    <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
-                </li>
-                <li>
-                    <Link id='health' onClick={setCategory}>Health</Link>
-                </li>
-                <li>
-                    <Link id='science' onClick={setCategory}>Science</Link>
-                </li>
-                <li>
-                    <Link id='sports' onClick={setCategory}>Sports</Link>
-                </li>
-                <li>
-                    <Link id='technology' onClick={setCategory}>Technology</Link>
-                </li>
-                <li>
-                  {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
-                </li>
-              </ul>
-            </nav>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link id='home' className='nav-button'>Home</Link>
+            </li>
+            <li>
+              <Link id='general' className='nav-button' onClick={setCategory}>General</Link>
+            </li>
+            <li>
+                <Link id='business' onClick={setCategory}>Business</Link>
+            </li>
+            <li>
+                <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
+            </li>
+            <li>
+                <Link id='health' onClick={setCategory}>Health</Link>
+            </li>
+            <li>
+                <Link id='science' onClick={setCategory}>Science</Link>
+            </li>
+            <li>
+                <Link id='sports' onClick={setCategory}>Sports</Link>
+            </li>
+            <li>
+                <Link id='technology' onClick={setCategory}>Technology</Link>
+            </li>
+            <li>
+              {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
+            </li>
+          </ul>
+        </nav>
       </header>
 
 

@@ -71,6 +71,20 @@
 
 /* for nav bar and links inside */
 
+.form-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-field{
+  margin-right: 5px;
+}
+
+.form-inline{
+  display: flex;
+}
+
 nav {
   display: flex;
   gap: 30px;
