@@ -38,15 +38,35 @@ const LandingPage = () => {
             )}
           </div>
             <nav>
-                <Link id='home' >Home</Link>
-                <Link id='general' onClick={setCategory}>General</Link>
-                <Link id='business' onClick={setCategory}>Business</Link>
-                <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
-                <Link id='health' onClick={setCategory}>Health</Link>
-                <Link id='science' onClick={setCategory}>Science</Link>
-                <Link id='sports' onClick={setCategory}>Sports</Link>
-                <Link id='technology' onClick={setCategory}>Technology</Link>
-                {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
+              <ul>
+                <li>
+                  <Link id='home' className='nav-button'>Home</Link>
+                </li>
+                <li>
+                    <Link id='general' className='nav-button' onClick={setCategory}>General</Link>
+                </li>
+                <li>
+                    <Link id='business' onClick={setCategory}>Business</Link>
+                </li>
+                <li>
+                    <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
+                </li>
+                <li>
+                    <Link id='health' onClick={setCategory}>Health</Link>
+                </li>
+                <li>
+                    <Link id='science' onClick={setCategory}>Science</Link>
+                </li>
+                <li>
+                    <Link id='sports' onClick={setCategory}>Sports</Link>
+                </li>
+                <li>
+                    <Link id='technology' onClick={setCategory}>Technology</Link>
+                </li>
+                <li>
+                  {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
+                </li>
+              </ul>
             </nav>
       </header>
 
