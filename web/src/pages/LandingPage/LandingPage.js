@@ -8,7 +8,6 @@ import { Form, TextField, Submit } from '@redwoodjs/forms'
 
 
 
-
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
@@ -27,8 +26,6 @@ const LandingPage = () => {
   return (
     <>
 
-      {/* nav bar moved here for ease of use with article selection */}
-
       <header>
         <div className="title">
             <Link to={routes.landing()}><img id='logo' src={logo} alt="Goofy Goober Logo"></img></Link>
@@ -44,7 +41,7 @@ const LandingPage = () => {
             )}
           </div>
             <nav>
-                <Link to={routes.landing()} id='home' className='categories'>Home</Link>
+                <Link to={routes.landing()} id='home' style={{color: '#fa9dec'}}className='categories'>Home</Link>
                 <Link to={routes.landing()} id='general' className='categories' onClick={setCategory}>General</Link>
                 <Link to={routes.landing()} id='business' className='categories' onClick={setCategory}>Business</Link>
                 <Link to={routes.landing()} id='entertainment' className='categories' onClick={setCategory}>Entertainment</Link>
