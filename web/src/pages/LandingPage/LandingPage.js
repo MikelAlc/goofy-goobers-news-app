@@ -12,6 +12,10 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
+  const onSubmit = (data) => {
+    console.log(data)
+    changeState(data.input)
+  }
 
 
   const setCategory = (event) => { // switch category, select proper tab
@@ -65,7 +69,7 @@ const LandingPage = () => {
         </div>
          <div className='form-container'>
           <div>
-            <Form className='form-inline'>
+            <Form className='form-inline' onSubmit={onSubmit}>
               <TextField name="input" className='text-field'/>
               <Submit  className='rw-button rw-button-blue'>Search</Submit>
            </Form>

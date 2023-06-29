@@ -59,7 +59,7 @@ export const Success = ({ output }) => {
       const dateObj = new Date(articles[i].publishedAt)
       const dateString = (dateObj.getMonth()+1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
 
-      console.log(articles[i])
+      //console.log(articles[i])
       articleDivs.push(
       <a href={articles[i].url} key={i}>
         <div className='article-div'>

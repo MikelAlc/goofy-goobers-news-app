@@ -29,7 +29,7 @@ export const getArticles = async ({ criteria }) => {
 
 
 
-  } else {  // user settings
+  } else if (criteria.includes("/")){  // user settings
 
     let choices = criteria.split("/")
     choices.pop()
@@ -50,13 +50,27 @@ export const getArticles = async ({ criteria }) => {
 
         articles = [...articles, ...articlesWithCategory]
         totalResults += json.totalResults
-        console.log(articlesWithCategory)
+        //console.log(articlesWithCategory)
       }
 
     }
 
 
 
+  }
+  else{
+    console.log(criteria)
+    const response = await fetch(
+      `https://newsapi.org/v2/everything?q=${criteria}&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
+    )
+
+    const json = await response.json()
+
+    articles = json.articles.map(article => ({
+      ...article,
+      category: criteria
+    }));
+    totalResults = json.totalResults
   }
 
 
