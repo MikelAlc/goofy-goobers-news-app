@@ -4,7 +4,7 @@ import { useAuth } from 'src/auth'
 import { useState } from 'react'
 import ArticlesCell from 'src/components/ArticlesCell'
 import logo from 'web/public/img/pub_logos.png'
-import { Form, TextField, Submit } from '@redwoodjs/forms'
+import { Label, Form, NumberField, ButtonField, Submit } from '@redwoodjs/forms'
 
 
 const LandingPage = () => {
@@ -71,8 +71,26 @@ const LandingPage = () => {
       - Ty'rese
         */}
 
+      {/* Pagination stuff */}
+
+     <div className="rw-div">
+        <Form>
+        <div className="rw-button-group">
+           <ButtonField name="previousPage" className="rw-button rw-button-blue" value="◄"/>
 
 
+          <NumberField
+                    name="pageTravel"
+                    className="rw"
+                    min="1"
+                    max="100"
+
+                  />
+
+           <ButtonField name="nextPage" className="rw-button rw-button-blue" value="►"/>
+           </div>
+          </Form>
+        </div>
 
     </>
   )
