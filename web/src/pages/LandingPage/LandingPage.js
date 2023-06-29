@@ -81,7 +81,7 @@ const LandingPage = () => {
         <div className="form-container">
           <div>
             <Form className="form-inline" onSubmit={onSubmit}>
-              <TextField name="input" className="text-field" />
+              <TextField name="input" className="text-field" style={{ border: '1px solid black' }} />
               <Submit className="rw-button rw-button-blue">Search</Submit>
             </Form>
           </div>
