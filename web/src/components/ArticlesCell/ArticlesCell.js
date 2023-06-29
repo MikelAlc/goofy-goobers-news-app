@@ -41,9 +41,10 @@ export const Success = ({ output }) => {
   }
 
 
-
+  sortedArticles.sort((a, b) => 0.5 - Math.random()) // randomize articles so categories not stacked
   sortedArticles.sort(compareDates)
   articles = sortedArticles
+
 
   for (let i = 0; i < articles.length; i++) {
     if (articles[i].title && articles[i].author &&  // only inlude articles that have all fields

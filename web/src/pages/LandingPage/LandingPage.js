@@ -13,6 +13,7 @@ const LandingPage = () => {
   const [state, changeState] = useState()
 
 
+
   const setCategory = (event) => { // switch category, select proper tab
     const categories = document.getElementsByClassName('categories')
 
@@ -23,25 +24,26 @@ const LandingPage = () => {
     changeState(event.target.id) // the state will be the category itself, except 'home'
   }
 
-  const setUserPrefs = (event) => {
-    const categories = document.getElementsByClassName('categories')
+  // return string of categories from settings
+  // used to load preferences initially when page loads
+  const getUserPrefs = () => {
     let prefs = ''
-
-    for (let i=0; i<categories.length; i++) // reset all links to white
-      categories[i].style.color = 'white'
-    event.target.style.color = '#fa9dec' // set clicked clicked to pink
-
 
     for (const prop in currentUser) {
       if (typeof(currentUser[prop]) === "boolean" && currentUser[prop])
         prefs += prop + '/'
     }
 
-
-
-    changeState(prefs)
+    return prefs
 
   }
+
+  const setUserPrefs = (event) => { // for home button
+    changeState(getUserPrefs())
+  }
+
+
+  const userPreferences = getUserPrefs()
 
 
   return (
@@ -114,7 +116,7 @@ const LandingPage = () => {
           - Ty'rese */}
 
 
-      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
+      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={getUserPrefs()} /> }
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.
