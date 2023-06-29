@@ -71,6 +71,20 @@
 
 /* for nav bar and links inside */
 
+.form-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-field{
+  margin-right: 5px;
+}
+
+.form-inline{
+  display: flex;
+}
+
 nav {
   display: flex;
   gap: 30px;
@@ -85,12 +99,31 @@ nav {
   height: 50px;
 }
 
-nav > a {
+
+nav a {
   color: white;
+  display:block;
+  padding: 13px;
+
+
 }
 
-nav > a:hover{
-  color: #fff977;
+nav a:hover{
+  background-color: #d563b0;
+}
+
+nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+nav li{
+  float:left;
+  display: flex;
+  margin:0px;
 }
 
 #refresh-button {
