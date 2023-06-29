@@ -12,6 +12,7 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
+
   const setCategory = (event) => { // switch category, select proper tab
     const categories = document.getElementsByClassName('categories')
 
@@ -20,6 +21,26 @@ const LandingPage = () => {
     event.target.style.color = '#fa9dec' // set clicked clicked to pink
 
     changeState(event.target.id) // the state will be the category itself, except 'home'
+  }
+
+  const setUserPrefs = (event) => {
+    const categories = document.getElementsByClassName('categories')
+    let prefs = ''
+
+    for (let i=0; i<categories.length; i++) // reset all links to white
+      categories[i].style.color = 'white'
+    event.target.style.color = '#fa9dec' // set clicked clicked to pink
+
+
+    for (const prop in currentUser) {
+      if (typeof(currentUser[prop]) === "boolean" && currentUser[prop])
+        prefs += prop + '/'
+    }
+
+
+
+    changeState(prefs)
+
   }
 
 
@@ -52,7 +73,7 @@ const LandingPage = () => {
         <nav>
           <ul>
             <li>
-              <Link id='home' style={{color: '#fa9dec'}} className='categories'>Home</Link>
+              <Link id='home' style={{color: '#fa9dec'}} onClick={setUserPrefs} className='categories'>Home</Link>
             </li>
             <li>
               <Link id='general' className='categories'  onClick={setCategory}>General</Link>
@@ -86,9 +107,12 @@ const LandingPage = () => {
       <MetaTags title="Landing" description="Landing page" />
 
       {/* When the page initially loads, state is falsy, therefore the && will not
-          return a cell. By adding an || and a second operand, the cell will load initially.
-          Any subsequent changes to the state will cause the first operand
-          to be returned from the || since the state becomes truthy. - Ty'rese */}
+          return a cell. By adding an || and a second operand, the cell will initially load
+          articles based on user preferences . Any subsequent changes to the state will cause
+          the first operand to be returned from the || since the state becomes truthy.
+
+          - Ty'rese */}
+
 
       { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'general'} /> }
 

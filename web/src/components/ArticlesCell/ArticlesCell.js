@@ -67,7 +67,7 @@ export const Success = ({ output }) => {
     }
   }
 
-  console.log(articleDivs)
+
 
   //  react can display an array of components
   return <div className="articles-cell">{articleDivs}</div>
