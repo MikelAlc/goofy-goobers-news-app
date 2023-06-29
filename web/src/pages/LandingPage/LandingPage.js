@@ -5,11 +5,23 @@ import { useState } from 'react'
 import ArticlesCell from 'src/components/ArticlesCell'
 import logo from 'web/public/img/pub_logos.png'
 import { Form, TextField, Submit } from '@redwoodjs/forms'
+import { Input, IconButton, InputRightElement, InputGroup } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
 
 
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const handleSearchQueryChange = (event) => {
+    changeState(event.targe.id)
+  }
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    changeState('search')
+  }
 
 
   const setCategory = (event) => { // switch category, select proper tab
@@ -46,6 +58,25 @@ const LandingPage = () => {
                 <Link id='science' onClick={setCategory}>Science</Link>
                 <Link id='sports' onClick={setCategory}>Sports</Link>
                 <Link id='technology' onClick={setCategory}>Technology</Link>
+                <form onSubmit={handleSearch}>
+                <InputGroup>
+              <Input
+                type="text"
+                placeholder="Search Articles"
+                value={searchQuery}
+                onChange={handleSearchQueryChange}
+                style={{backgroundColor: 'white'}}
+              />
+              <InputRightElement>
+                <IconButton
+                  type="submit"
+                  aria-label="Search"
+                  icon={<SearchIcon />}
+                  className="search-button"
+                />
+              </InputRightElement>
+            </InputGroup>
+                  </form>
                 {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
             </nav>
       </header>
@@ -58,7 +89,11 @@ const LandingPage = () => {
           Any subsequent changes to the state triggered by the button will cause the first operand
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
+
+
       { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'business'} /> }
+
+      {state === 'search' && <ArticlesCell criteria={searchQuery} />}
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.
