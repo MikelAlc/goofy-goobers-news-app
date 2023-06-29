@@ -11,26 +11,31 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
-  var pageNum=2;
+  var pageNum=1;
+
   const setCategory = (event) => { // switch category, select proper tab
     // event.target.style.color = '#fa9dec'
     changeState(event.target.id) // the state will be the category itself, except 'home'
   }
   const setPage = (event) => { //change pages
 
-    if( event.target.id=="previous")
+    if( event.target.id=="previous"){
       pageNum--;
+      console.log(pageNum);
+    }
 
 
     if( event.target.id=="next"){
       pageNum++;
+      console.log(pageNum);
     }
-  /*
-    if( event.target.id=="manualInput")
+
+    if( event.target.id=="manualInput"&&event.keyCode == 13) {
       pageNum=event.target.value;
-  */
+
       console.log(pageNum);
   }
+}
 
 
   return (
@@ -100,8 +105,8 @@ const LandingPage = () => {
                     className="rw"
                     min="1"
                     max="100"
-                    value="1"
-                   // onEnter={setPage}
+                    onKeyDown={setPage}
+
                   />
 
            <ButtonField id = "next" name="nextPage" className="rw-button rw-button-blue" value="►" onClick={setPage}/>
