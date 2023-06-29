@@ -61,7 +61,7 @@ const LandingPage = () => {
                 <Link id='business' className='categories'  onClick={setCategory}>Business</Link>
             </li>
             <li>
-                <Link id='entertainment' onClick={setCategory}>Entertainment</Link>
+                <Link id='entertainment' className='categories' onClick={setCategory}>Entertainment</Link>
             </li>
             <li>
                 <Link id='health' className='categories' onClick={setCategory}>Health</Link>
