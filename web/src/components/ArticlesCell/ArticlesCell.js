@@ -27,14 +27,30 @@ export const Failure = ({ error }) => (
 )
 
 export const Success = ({ output }) => {
-  const articles = output.articles
+  let articles = output.articles
+  let sortedArticles = [...articles]
   const articleDivs = []
+
+  const compareDates = (a, b) => {
+    const aDate = new Date(a.publishedAt)
+    const bDate = new Date(b.publishedAt)
+
+    if (aDate.getTime() > bDate.getTime()) return -1
+    if (aDate.getTime() < bDate.getTime()) return 1
+    return 0
+  }
+
+
+  sortedArticles.sort((a, b) => 0.5 - Math.random()) // randomize articles so categories not stacked
+  sortedArticles.sort(compareDates)
+  articles = sortedArticles
+
 
   for (let i = 0; i < articles.length; i++) {
     if (articles[i].title && articles[i].author &&  // only inlude articles that have all fields
         articles[i].publishedAt && articles[i].urlToImage && articles[i].content){
       const dateObj = new Date(articles[i].publishedAt)
-      const dateString = dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+      const dateString = (dateObj.getMonth()+1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
 
 
       articleDivs.push(
@@ -50,9 +66,9 @@ export const Success = ({ output }) => {
       )
 
     }
-
-
   }
+
+
 
   //  react can display an array of components
   return <div className="articles-cell">{articleDivs}</div>
