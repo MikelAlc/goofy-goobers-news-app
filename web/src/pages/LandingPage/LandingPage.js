@@ -10,7 +10,7 @@ import { Label, Form, NumberField, ButtonField, Submit } from '@redwoodjs/forms'
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
-
+  const [pstate, pchangeState] = useState()
   var pageNum=1;
 
   const setCategory = (event) => { // switch category, select proper tab
@@ -19,21 +19,24 @@ const LandingPage = () => {
   }
   const setPage = (event) => { //change pages
 
-    if( event.target.id=="previous"){
+    if( event.target.id=="previous"&&parseInt(pstate)>1){
       pageNum--;
-      console.log(pageNum);
+      pchangeState(parseInt(pstate)-1)
+      console.log(pstate);
     }
 
 
-    if( event.target.id=="next"){
+    if( event.target.id=="next"&&parseInt(pstate)<99){
       pageNum++;
-      console.log(pageNum);
+      pchangeState(parseInt(pstate)+1)
+      console.log(pstate);
     }
 
+    //manual page entry on 'ENTER' press
     if( event.target.id=="manualInput"&&event.keyCode == 13) {
       pageNum=event.target.value;
-
-      console.log(pageNum);
+      pchangeState(event.target.value)
+      console.log(pstate);
   }
 }
 
@@ -78,7 +81,7 @@ const LandingPage = () => {
           Any subsequent changes to the state triggered by the button will cause the first operand
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
-      { (state && <ArticlesCell criteria={state} pageNumber={pageNum}/>) || <ArticlesCell criteria={'business'} /> }
+      { (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate)}/>) || <ArticlesCell criteria={'business'} pageNumber={1}/> }
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.
@@ -94,9 +97,10 @@ const LandingPage = () => {
       {/* Pagination stuff */}
 
      <div className="rw-div">
+      <span><b>Page {pstate}</b></span>
         <Form>
         <div className="rw-button-group">
-           <ButtonField id = "previous" name="previousPage" className="rw-button rw-button-blue" value="◄" onClick={setPage}/>
+          <ButtonField id = "previous" name="previousPage" className="rw-button rw-button-blue" value="◄" onClick={setPage}/>
 
 
           <NumberField
@@ -106,6 +110,7 @@ const LandingPage = () => {
                     min="1"
                     max="100"
                     onKeyDown={setPage}
+                    placeholder={pstate}
 
                   />
 
