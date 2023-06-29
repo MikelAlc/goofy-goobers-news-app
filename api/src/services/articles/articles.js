@@ -1,4 +1,4 @@
-export const getArticles = async ({ criteria }) => {
+export const getArticles = async ({ criteria, pageNumber}) => {
 
   /* Criteria will either be a written search or a set of categories from the user's settings.
      Use that to build the fetch url. For categories, use 'top-headlines' endpoint and do a separate
@@ -7,7 +7,7 @@ export const getArticles = async ({ criteria }) => {
    */
 
   const response = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&apiKey=ba6325d8cd694530bee9199d481a3861`
+    `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&pageSize=9&page=${pageNumber}&apiKey=ba6325d8cd694530bee9199d481a3861`
   )
 
 

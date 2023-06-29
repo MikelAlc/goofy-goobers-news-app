@@ -15,6 +15,6 @@ export const schema = gql`
   }
 
   type Query {
-    getArticles(criteria: String!): Articles! @skipAuth
+    getArticles(criteria: String!, pageNumber: Int!): Articles! @skipAuth
   }
 `

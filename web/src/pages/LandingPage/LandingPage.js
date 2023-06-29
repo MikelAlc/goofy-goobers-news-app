@@ -11,10 +11,25 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
-
+  var pageNum=2;
   const setCategory = (event) => { // switch category, select proper tab
     // event.target.style.color = '#fa9dec'
     changeState(event.target.id) // the state will be the category itself, except 'home'
+  }
+  const setPage = (event) => { //change pages
+
+    if( event.target.id=="previous")
+      pageNum--;
+
+
+    if( event.target.id=="next"){
+      pageNum++;
+    }
+  /*
+    if( event.target.id=="manualInput")
+      pageNum=event.target.value;
+  */
+      console.log(pageNum);
   }
 
 
@@ -58,7 +73,7 @@ const LandingPage = () => {
           Any subsequent changes to the state triggered by the button will cause the first operand
           to be returned from the || since the state becomes truthy. - Ty'rese */}
 
-      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={'business'} /> }
+      { (state && <ArticlesCell criteria={state} pageNumber={pageNum}/>) || <ArticlesCell criteria={'business'} /> }
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.
@@ -76,18 +91,20 @@ const LandingPage = () => {
      <div className="rw-div">
         <Form>
         <div className="rw-button-group">
-           <ButtonField name="previousPage" className="rw-button rw-button-blue" value="◄"/>
+           <ButtonField id = "previous" name="previousPage" className="rw-button rw-button-blue" value="◄" onClick={setPage}/>
 
 
           <NumberField
+                    id = "manualInput"
                     name="pageTravel"
                     className="rw"
                     min="1"
                     max="100"
-
+                    value="1"
+                   // onEnter={setPage}
                   />
 
-           <ButtonField name="nextPage" className="rw-button rw-button-blue" value="►"/>
+           <ButtonField id = "next" name="nextPage" className="rw-button rw-button-blue" value="►" onClick={setPage}/>
            </div>
           </Form>
         </div>
