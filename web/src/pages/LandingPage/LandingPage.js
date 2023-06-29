@@ -10,8 +10,8 @@ import { Label, Form, NumberField, ButtonField, Submit } from '@redwoodjs/forms'
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
-  const [pstate, pchangeState] = useState()
-  var pageNum=1;
+  const [pstate, pchangeState] = useState(1)
+  //var pageNum=1;
 
   const setCategory = (event) => { // switch category, select proper tab
     // event.target.style.color = '#fa9dec'
@@ -20,20 +20,20 @@ const LandingPage = () => {
   const setPage = (event) => { //change pages
 
     if( event.target.id=="previous"&&parseInt(pstate)>1){
-      pageNum--;
+      //pageNum--;
       pchangeState(parseInt(pstate)-1)
       console.log(pstate);
     }
 
 
     if( event.target.id=="next"&&parseInt(pstate)<99){
-      pageNum++;
+      //pageNum++;
       pchangeState(parseInt(pstate)+1)
       console.log(pstate);
     }
 
     //manual page entry on 'ENTER' press
-    if( event.target.id=="manualInput"&&event.keyCode == 13) {
+    if( event.target.id=="manualInput"&&event.keyCode == 13&&event.target.value>0&&event.target.value<101) {
       pageNum=event.target.value;
       pchangeState(event.target.value)
       console.log(pstate);
