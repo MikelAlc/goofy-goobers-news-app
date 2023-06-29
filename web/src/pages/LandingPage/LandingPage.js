@@ -12,6 +12,10 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
+  const onSubmit = (data) => {
+    console.log(data)
+    changeState(data.input)
+  }
 
 
   const setCategory = (event) => { // switch category, select proper tab
@@ -34,12 +38,22 @@ const LandingPage = () => {
         prefs += prop + '/'
     }
 
+    //if(prefs.length==0) return "general"
     return prefs
 
   }
 
   const setUserPrefs = (event) => { // for home button
-    changeState(getUserPrefs())
+    const categories = document.getElementsByClassName('categories')
+
+    for (let i=0; i<categories.length; i++) // reset all links to white
+      categories[i].style.color = 'white'
+    event.target.style.color = '#fa9dec' // set clicked clicked to pink
+
+    if(isAuthenticated)
+      changeState(getUserPrefs())
+    else
+      changeState(null)
   }
 
 
@@ -55,7 +69,7 @@ const LandingPage = () => {
         </div>
          <div className='form-container'>
           <div>
-            <Form className='form-inline'>
+            <Form className='form-inline' onSubmit={onSubmit}>
               <TextField name="input" className='text-field'/>
               <Submit  className='rw-button rw-button-blue'>Search</Submit>
            </Form>
@@ -115,8 +129,18 @@ const LandingPage = () => {
 
           - Ty'rese */}
 
+      {/*<p>{getUserPrefs()}</p>*/}
 
-      { (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={getUserPrefs()} /> }
+      {!state && !isAuthenticated?
+        <div>
+          <h2 className="rw-heading rw-heading-secondary">Log in for a custom home feed </h2>
+
+          <img src="img/PA.jpeg" alt="Pugs" width="300px"   />
+
+        </div>
+
+        : (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={getUserPrefs()} />
+      }
 
 
       {/* All instances of 'zip' have been changed to 'criteria'.

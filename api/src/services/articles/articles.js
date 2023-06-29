@@ -16,35 +16,61 @@ export const getArticles = async ({ criteria }) => {
 
   if (categories.includes(criteria)){  // get articles from nav bar button
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&apiKey=ba6325d8cd694530bee9199d481a3861`
+      `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
     )
 
     const json = await response.json()
 
-    articles = json.articles
+    articles = json.articles.map(article => ({
+      ...article,
+      category: criteria
+    }));
     totalResults = json.totalResults
 
 
 
-  } else {  // user settings
+  } else if (criteria.includes("/")){  // user settings
 
     let choices = criteria.split("/")
     choices.pop()
+    console.log(choices)
 
     for (let i=0; i<choices.length; i++){
       let response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${choices[i]}&apiKey=ba6325d8cd694530bee9199d481a3861`
+        `https://newsapi.org/v2/top-headlines?country=us&category=${choices[i]}&apiKey=7f867c25279c4ba79d18d1146c961de1`
       )
 
       let json = await response.json()
+      if (Array.isArray(json.articles)) {
 
-      articles = [...articles, ...json.articles]
-      totalResults += json.totalResults
+        let articlesWithCategory = json.articles.map(article => ({
+          ...article,
+          category: choices[i] // Assign the category value
+        }));
+
+        articles = [...articles, ...articlesWithCategory]
+        totalResults += json.totalResults
+        //console.log(articlesWithCategory)
+      }
 
     }
 
 
 
+  }
+  else{
+    console.log(criteria)
+    const response = await fetch(
+      `https://newsapi.org/v2/everything?q=${criteria}&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
+    )
+
+    const json = await response.json()
+
+    articles = json.articles.map(article => ({
+      ...article,
+      category: criteria
+    }));
+    totalResults = json.totalResults
   }
 
 
