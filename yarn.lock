@@ -2834,7 +2834,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/react@npm:^2":
+"@chakra-ui/react@npm:^2.7.1":
   version: 2.7.1
   resolution: "@chakra-ui/react@npm:2.7.1"
   dependencies:
@@ -3330,7 +3330,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11":
+"@emotion/react@npm:^11.11.1":
   version: 11.11.1
   resolution: "@emotion/react@npm:11.11.1"
   dependencies:
@@ -3371,7 +3371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11":
+"@emotion/styled@npm:^11.11.0":
   version: 11.11.0
   resolution: "@emotion/styled@npm:11.11.0"
   dependencies:
@@ -14784,9 +14784,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^9":
-  version: 9.1.7
-  resolution: "framer-motion@npm:9.1.7"
+"framer-motion@npm:^10.12.17":
+  version: 10.12.17
+  resolution: "framer-motion@npm:10.12.17"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     tslib: ^2.4.0
@@ -14796,7 +14796,12 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: 4a152079cfd50d6235713534972cb1ae2d1f4f420db638f79b822e3c01a262a7883d0d84f64ddc58ea369aa0b16336c2cf282349f829dc209bd0e5c6e33d171a
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: d22f173d3de445ead6a784737803bd6316f6e3e78e8fba3cedc3b3f405471e966b190c0caff855f59905afc017c475225e26af69acb932180d0e4ac4d7c9fbdb
   languageName: node
   linkType: hard
 
@@ -25782,14 +25787,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:web"
   dependencies:
-    "@chakra-ui/react": ^2
-    "@emotion/react": ^11
-    "@emotion/styled": ^11
+    "@chakra-ui/react": ^2.7.1
+    "@emotion/react": ^11.11.1
+    "@emotion/styled": ^11.11.0
     "@redwoodjs/auth-dbauth-web": 5.2.3
     "@redwoodjs/forms": 5.2.3
     "@redwoodjs/router": 5.2.3
     "@redwoodjs/web": 5.2.3
-    framer-motion: ^9
+    framer-motion: ^10.12.17
     prop-types: 15.8.1
     react: 18.2.0
     react-dom: 18.2.0

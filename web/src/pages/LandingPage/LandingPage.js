@@ -12,7 +12,13 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
 
+
   const onSubmit = (data) => {
+    const hasEvenParentheses = /^([^()]*\([^()]*\))*[^()]*$/.test(input);
+    if (!hasEvenParentheses) {
+      console.log('Missing parenthesis. Please enter a valid search query');
+      return;
+    }
     console.log(data)
     changeState(data.input)
   }
@@ -140,6 +146,8 @@ const LandingPage = () => {
         </div>
 
         : (state && <ArticlesCell criteria={state} />) || <ArticlesCell criteria={getUserPrefs()} />
+
+
       }
 
 
