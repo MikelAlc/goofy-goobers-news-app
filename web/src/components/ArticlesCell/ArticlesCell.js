@@ -1,7 +1,7 @@
 export const QUERY = gql`
 
-  query GetArticlesQuery($criteria: String!) {
-    output: getArticles(criteria: $criteria) {
+  query GetArticlesQuery($criteria: String!, $pageNumber: Int!) {
+    output: getArticles(criteria: $criteria, pageNumber: $pageNumber) {
       totalResults
       articles {
         ... on Article {

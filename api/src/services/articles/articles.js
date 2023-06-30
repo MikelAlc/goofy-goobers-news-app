@@ -1,4 +1,4 @@
-export const getArticles = async ({ criteria }) => {
+export const getArticles = async ({ criteria, pageNumber}) => {
 
 
 
@@ -8,6 +8,7 @@ export const getArticles = async ({ criteria }) => {
      the url with each search term. The parsing can be done here. - Ty'rese
    */
 
+
   const categories = ['general', 'business', 'entertainment',
                       'technology', 'sports', 'health', 'science']
 
@@ -16,7 +17,7 @@ export const getArticles = async ({ criteria }) => {
 
   if (categories.includes(criteria)){  // get articles from nav bar button
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
+      `https://newsapi.org/v2/top-headlines?country=us&category=${criteria}&pageSize=9&page=${pageNumber}&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
     )
 
     const json = await response.json()
@@ -37,7 +38,7 @@ export const getArticles = async ({ criteria }) => {
 
     for (let i=0; i<choices.length; i++){
       let response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${choices[i]}&apiKey=7f867c25279c4ba79d18d1146c961de1`
+        `https://newsapi.org/v2/top-headlines?country=us&category=${choices[i]}&pageSize=9&page=${pageNumber}&apiKey=7f867c25279c4ba79d18d1146c961de1`
       )
 
       let json = await response.json()
@@ -61,7 +62,7 @@ export const getArticles = async ({ criteria }) => {
   else{
     console.log(criteria)
     const response = await fetch(
-      `https://newsapi.org/v2/everything?q=${criteria}&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
+      `https://newsapi.org/v2/everything?q=${criteria}&pageSize=9&page=${pageNumber}&country=us&apiKey=6ea1d97965ac4d75a9ba09b29075cc1c`
     )
 
     const json = await response.json()
@@ -72,6 +73,7 @@ export const getArticles = async ({ criteria }) => {
     }));
     totalResults = json.totalResults
   }
+
 
 
 
