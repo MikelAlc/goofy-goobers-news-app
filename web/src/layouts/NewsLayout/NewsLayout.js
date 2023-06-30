@@ -22,17 +22,7 @@ const NewsLayout = ({ children }) => {
             <Link to={routes.login()} className='rw-button rw-button-blue'>Login</Link>
           )}
         </div>
-          <nav>
-              <Link to={routes.landing()}>Home</Link>
-              <Link >General</Link>
-              <Link >Business</Link>
-              <Link >Entertainment</Link>
-              <Link >Health</Link>
-              <Link >Science</Link>
-              <Link >Sports</Link>
-              <Link >Technology</Link>
-              {isAuthenticated? <Link to={routes.settings()}>Settings</Link>:<></>}
-          </nav>
+
 
       </header>
       <main>{children}</main>
