@@ -12,8 +12,7 @@ let squareY = canvasSize / 3;
 const Puzzle8Page = () => {
 
   const canvasRef = useRef(null);
-  const [board, setBoard] = useState(boardPosition);
-  const [runEffect, setRunEffect] = useState(false);
+
 
   const swap = (arr, i, j) => {
     let temp = arr[i];
@@ -27,11 +26,99 @@ const Puzzle8Page = () => {
     ctx.fillRect(0, 0, canvasSize, canvasSize);
   }
 
+  function keyContols(event) {
+      event.preventDefault();
+      const speed = canvasSize/3;
+      const firstPosition = 0;
+      const secondPosition = (canvasSize/3);
+      const thirdPosition = (canvasSize/3)*2;
+      let score=0;
+
+      console.log(event.key, event.keyCode);
+      console.log(boardPosition);
+      if (event.keyCode === 40) { // DOWN
+          if(squareY==firstPosition){
+              squareY += speed;
+              if(squareX==firstPosition) swap(boardPosition,0,3);
+              if(squareX==secondPosition) swap(boardPosition,1,4);
+              if(squareX==thirdPosition) swap(boardPosition,2,5);
+              score++;
+          }
+          else if(squareY==secondPosition){
+              squareY += speed;
+              if(squareX==firstPosition) swap(boardPosition,3,6);
+              if(squareX==secondPosition) swap(boardPosition,4,7);
+              if(squareX==thirdPosition) swap(boardPosition,5,8);
+              score++;
+          }
+
+
+          drawBoard();
+          console.log("gere");
+      }
+      if (event.keyCode === 38) { // UP
+          if(squareY==secondPosition){
+              squareY -= speed;
+              if(squareX==firstPosition) swap(boardPosition,3,0);
+              if(squareX==secondPosition) swap(boardPosition,4,1);
+              if(squareX==thirdPosition) swap(boardPosition,5,2);
+              score++;
+          }
+          else if(squareY==thirdPosition){
+              squareY -= speed;
+              if(squareX==firstPosition) swap(boardPosition,6,3);
+              if(squareX==secondPosition) swap(boardPosition,7,4);
+              if(squareX==thirdPosition) swap(boardPosition,8,5);
+              score++;
+          }
+          drawBoard();
+      }
+      if (event.keyCode === 37) { // LEFT
+          if(squareX==secondPosition){
+              squareX -= speed;
+              if(squareY==firstPosition) swap(boardPosition,1,0);
+              if(squareY==secondPosition) swap(boardPosition,4,3);
+              if(squareY==thirdPosition) swap(boardPosition,6,7);
+              score++;
+          }
+          else if(squareX==thirdPosition){
+              squareX -= speed;
+              if(squareY==firstPosition) swap(boardPosition,2,1);
+              if(squareY==secondPosition) swap(boardPosition,5,4);
+              if(squareY==thirdPosition) swap(boardPosition,8,7);
+              score++;
+          }
+          drawBoard();
+      }
+      if (event.keyCode === 39) { // RIGHT
+          if(squareX==firstPosition){
+              squareX += speed;
+              if(squareY==firstPosition) swap(boardPosition,1,0);
+              if(squareY==secondPosition) swap(boardPosition,4,3);
+              if(squareY==thirdPosition) swap(boardPosition,6,7);
+              score++;
+          }
+          else if(squareX==secondPosition){
+              squareX+= speed;
+              if(squareY==firstPosition) swap(boardPosition,2,1);
+              if(squareY==secondPosition) swap(boardPosition,5,4);
+              if(squareY==thirdPosition) swap(boardPosition,8,7);
+              score++;
+          }
+          drawBoard();
+      }
+    }
+
   const startGame = () => {
     canvas.removeEventListener('click', startGame);
+
+    boardPosition=[4, 6, 8, 2, 0, 3, 7, 1, 5];
+    squareX=140;
+    squareY=140;
+    canvas.addEventListener('keydown',keyContols);
+
     console.log("start");
-    setRunEffect(true);
-    drawBoard;
+    drawBoard();
 
   }
 
@@ -62,8 +149,8 @@ const Puzzle8Page = () => {
   }
 
 
-  const drawBoard = useEffect(() => {
-    if (runEffect) {
+  const drawBoard = () => {
+
       console.log("drawing board");
 
       // Clear the canvas
@@ -101,10 +188,25 @@ const Puzzle8Page = () => {
       ctx.fillStyle = '#000000';
       ctx.fillRect(squareX, squareY, cellSize, cellSize);
 
-    }
+      if (boardPosition.toString()=="1,2,3,4,5,6,7,8,0") {
+        endGame();
+      }
 
 
-  }, [runEffect]);
+  }
+
+  const endGame = () => {
+
+    // Display the final score
+    clearCanvas();
+    ctx.fillStyle = '#000000';
+    ctx.font = '30px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Nice ', canvas.width / 2, canvas.height / 2);
+    ctx.fillText('Click to Play Again',canvas.width / 2, canvas.height / 2 + 30);
+    canvas.addEventListener('click', startGame);
+
+}
 
   return (<div>
     <h1>8-Puzzle</h1>
