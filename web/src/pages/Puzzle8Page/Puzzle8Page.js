@@ -33,9 +33,10 @@ const Puzzle8Page = () => {
       const secondPosition = (canvasSize/3);
       const thirdPosition = (canvasSize/3)*2;
       let score=0;
-
+      /*
       console.log(event.key, event.keyCode);
       console.log(boardPosition);
+      */
       if (event.keyCode === 40) { // DOWN
           if(squareY==firstPosition){
               squareY += speed;
@@ -54,7 +55,7 @@ const Puzzle8Page = () => {
 
 
           drawBoard();
-          console.log("gere");
+
       }
       if (event.keyCode === 38) { // UP
           if(squareY==secondPosition){
@@ -109,12 +110,15 @@ const Puzzle8Page = () => {
       }
     }
 
+
   const startGame = () => {
     canvas.removeEventListener('click', startGame);
 
     boardPosition=[4, 6, 8, 2, 0, 3, 7, 1, 5];
-    squareX=140;
-    squareY=140;
+
+
+    squareX=(canvasSize/3) * (boardPosition.indexOf(0) % 3);
+    squareY=(canvasSize/3) * Math.floor(boardPosition.indexOf(0) / 3);
     canvas.addEventListener('keydown',keyContols);
 
     console.log("start");
@@ -204,6 +208,7 @@ const Puzzle8Page = () => {
     ctx.textAlign = 'center';
     ctx.fillText('Nice ', canvas.width / 2, canvas.height / 2);
     ctx.fillText('Click to Play Again',canvas.width / 2, canvas.height / 2 + 30);
+    canvas.removeEventListener('keydown', keyContols)
     canvas.addEventListener('click', startGame);
 
 }
