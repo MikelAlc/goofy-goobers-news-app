@@ -166,6 +166,13 @@ const LandingPage = () => {
                 <></>
               )}
             </li>
+            <li>
+            {isAuthenticated ? (
+                <Link to={routes.puzzle8()}>8-Puzzle</Link>
+              ) : (
+                <></>
+              )}
+            </li>
           </ul>
         </nav>
       </header>
