@@ -14,7 +14,6 @@ const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [state, changeState] = useState()
   const [pstate, pchangeState] = useState(1)
-  //var pageNum=1;
 
   const onSubmit = (data) => {
     const hasEvenParentheses = /^([^()]*\([^()]*\))*[^()]*$/.test(input)
@@ -43,21 +42,18 @@ const LandingPage = () => {
   const setPage = (event) => { //change pages
 
     if( event.target.id=="previous"&&parseInt(pstate)>1){
-      //pageNum--;
       pchangeState(parseInt(pstate)-1)
       console.log(pstate);
     }
 
 
     if( event.target.id=="next"&&parseInt(pstate)<99){
-      //pageNum++;
       pchangeState(parseInt(pstate)+1)
       console.log(pstate);
     }
 
     //manual page entry on 'ENTER' press
-    if( event.target.id=="manualInput"&&event.keyCode == 13&&event.target.value>0&&event.target.value<101) {
-      pageNum=event.target.value;
+    if( event.target.id=="manualInput" && event.keyCode==13 && event.target.value>0 && event.target.value<101) {
       pchangeState(event.target.value)
       console.log(pstate);
   }
@@ -217,7 +213,7 @@ const LandingPage = () => {
           <img src="img/PA.jpeg" alt="Pugs" width="300px" />
         </div>
       ) : (
-        (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate}}/>) || (
+        (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate)}/>) || (
           <ArticlesCell criteria={getUserPrefs()} pageNumber={1} />
         )
       )}
@@ -233,7 +229,7 @@ const LandingPage = () => {
         */}
 
 
-      {/* Pagination stuff */}
+      {/* Pagination stuff, may need to change max page to accomodate end of at=rticles fetched */}
 
      <div className="rw-div">
       <span><b>Page {pstate}</b></span>
