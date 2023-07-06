@@ -15,7 +15,6 @@ import img8 from 'web/public/img/puzzle8.jpg'
 
 const canvasSize = 420;
 let boardPosition = [4, 6, 8, 2, 0, 3, 7, 1, 5];
-let imagesPosition = [img4, img6, img8, img2, img0, img3, img7, img1, img5]
 let canvas;
 let ctx;
 let squareX = canvasSize / 3;
@@ -127,7 +126,7 @@ const Puzzle8Page = () => {
   const startGame = () => {
     canvas.removeEventListener('click', startGame);
 
-    // boardPosition.sort(() => (Math.random() > .5) ? 1 : -1);  // randomize puzzle
+    boardPosition.sort(() => (Math.random() > .5) ? 1 : -1);  // randomize puzzle
 
 
 
