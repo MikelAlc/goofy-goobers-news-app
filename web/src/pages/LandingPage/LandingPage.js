@@ -217,7 +217,7 @@ const LandingPage = () => {
           <img src="img/PA.jpeg" alt="Pugs" width="300px" />
         </div>
       ) : (
-        (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate}}/>) || (
+        (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate)}/>) || (
           <ArticlesCell criteria={getUserPrefs()} pageNumber={1} />
         )
       )}
