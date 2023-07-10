@@ -123,10 +123,24 @@ const Puzzle8Page = () => {
     }
 
 
+    function isSolvable(){
+      let invCount = 0;
+      for (let i = 0; i < boardPosition.length - 1; i++) {
+        for (let j = i + 1; j < boardPosition.length; j++) {
+          if (boardPosition[j] !== 0 && boardPosition[i] !== 0 && boardPosition[i] > boardPosition[j]) {
+            invCount++;
+          }
+        }
+      }
+      return (invCount % 2 == 0);
+    }
+
   const startGame = () => {
     canvas.removeEventListener('click', startGame);
 
-    boardPosition.sort(() => (Math.random() > .5) ? 1 : -1);  // randomize puzzle
+    do{
+      boardPosition.sort(() => (Math.random() > .5) ? 1 : -1);  // randomize puzzle
+    }while(!isSolvable());
 
 
 
