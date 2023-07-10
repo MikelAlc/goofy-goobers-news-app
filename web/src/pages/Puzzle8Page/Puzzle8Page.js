@@ -1,6 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useState, useRef } from 'react';
+import JSConfetti from 'js-confetti'
 
 import img0 from 'web/public/img/puzzle0.jpg'
 import img1 from 'web/public/img/puzzle1.jpg'
@@ -20,11 +21,14 @@ let ctx;
 let squareX = canvasSize / 3;
 let squareY = canvasSize / 3;
 
-
 const Puzzle8Page = () => {
 
   const canvasRef = useRef(null);
 
+  const launchConfetti = () => {
+    const jsConfetti = new JSConfetti()
+    jsConfetti.addConfetti();
+  };
 
   const swap = (arr, i, j) => {
     let temp = arr[i];
@@ -240,12 +244,15 @@ const Puzzle8Page = () => {
   const endGame = () => {
 
     // Display the final score
+    /*
     clearCanvas();
     ctx.fillStyle = '#000000';
     ctx.font = '30px Arial';
     ctx.textAlign = 'center';
     ctx.fillText('Nice ', canvas.width / 2, canvas.height / 2);
     ctx.fillText('Click to Play Again',canvas.width / 2, canvas.height / 2 + 30);
+    */
+    launchConfetti();
     canvas.removeEventListener('keydown', keyContols)
     canvas.addEventListener('click', startGame);
 

@@ -17772,6 +17772,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-confetti@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "js-confetti@npm:0.11.0"
+  checksum: 51009200761c77790d2863ec15f9eaefeabcb630bbbf13c9253ac8690bda350107c05e4bd73349a29fcd5ed48e56475e6777b76f293cf13acc3d4c5fa2ac283c
+  languageName: node
+  linkType: hard
+
 "js-levenshtein@npm:^1.1.6":
   version: 1.1.6
   resolution: "js-levenshtein@npm:1.1.6"
@@ -22741,6 +22748,7 @@ __metadata:
     "@chakra-ui/icons": ^2.0.19
     "@redwoodjs/auth-dbauth-setup": 5.2.3
     "@redwoodjs/core": 5.2.3
+    js-confetti: ^0.11.0
   languageName: unknown
   linkType: soft
 
