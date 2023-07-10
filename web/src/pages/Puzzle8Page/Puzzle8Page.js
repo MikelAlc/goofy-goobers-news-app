@@ -2,12 +2,24 @@ import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useState, useRef } from 'react';
 
+import img0 from 'web/public/img/puzzle0.jpg'
+import img1 from 'web/public/img/puzzle1.jpg'
+import img2 from 'web/public/img/puzzle2.jpg'
+import img3 from 'web/public/img/puzzle3.jpg'
+import img4 from 'web/public/img/puzzle4.jpg'
+import img5 from 'web/public/img/puzzle5.jpg'
+import img6 from 'web/public/img/puzzle6.jpg'
+import img7 from 'web/public/img/puzzle7.jpg'
+import img8 from 'web/public/img/puzzle8.jpg'
+
+
 const canvasSize = 420;
 let boardPosition = [4, 6, 8, 2, 0, 3, 7, 1, 5];
 let canvas;
 let ctx;
 let squareX = canvasSize / 3;
 let squareY = canvasSize / 3;
+
 
 const Puzzle8Page = () => {
 
@@ -114,7 +126,8 @@ const Puzzle8Page = () => {
   const startGame = () => {
     canvas.removeEventListener('click', startGame);
 
-    boardPosition=[4, 6, 8, 2, 0, 3, 7, 1, 5];
+    boardPosition.sort(() => (Math.random() > .5) ? 1 : -1);  // randomize puzzle
+
 
 
     squareX=(canvasSize/3) * (boardPosition.indexOf(0) % 3);
@@ -183,14 +196,25 @@ const Puzzle8Page = () => {
         ctx.stroke();
       }
 
+      // draw images
+      for (let i = 0; i < boardPosition.length; i++){
+        ctx.drawImage(document.getElementById('img' + boardPosition[i]),
+                      (canvasSize / 3) * (i % 3),
+                      (canvasSize / 3) * Math.floor(i / 3));
+      }
+
+
       //Draws the numbers in the correct position
+      ctx.fillStyle = 'white';
       for (let i = 0; i < boardPosition.length; i++) {
         ctx.fillText(boardPosition[i], (canvasSize / 3) * (i % 3) + (canvasSize / 5.8), (canvasSize / 3) * Math.floor(i / 3) + (canvasSize / 5.5));
       }
 
       //Draw Black Square
-      ctx.fillStyle = '#000000';
-      ctx.fillRect(squareX, squareY, cellSize, cellSize);
+      // ctx.fillStyle = '#000000';
+      // ctx.fillRect(squareX, squareY, cellSize, cellSize);
+
+
 
       if (boardPosition.toString()=="1,2,3,4,5,6,7,8,0") {
         endGame();
@@ -213,11 +237,25 @@ const Puzzle8Page = () => {
 
 }
 
+  {/* images cannot be drawn into canvas from import, so I placed them in an invisible div*/}
+
   return (<div>
     <h1>8-Puzzle</h1>
     <div className='centered'>
       <canvas ref={canvasRef} id="myCanvas" width={canvasSize} height={canvasSize} tabIndex="0" ></canvas>
     </div>
+    <div style={{display: 'none'}}>
+      <img id="img0" src={img0} alt="Goofy Goober Logo" ></img>
+      <img id="img1" src={img1} alt="Goofy Goober Logo" ></img>
+      <img id="img2" src={img2} alt="Goofy Goober Logo" ></img>
+      <img id="img3" src={img3} alt="Goofy Goober Logo" ></img>
+      <img id="img4" src={img4} alt="Goofy Goober Logo" ></img>
+      <img id="img5" src={img5} alt="Goofy Goober Logo" ></img>
+      <img id="img6" src={img6} alt="Goofy Goober Logo" ></img>
+      <img id="img7" src={img7} alt="Goofy Goober Logo" ></img>
+      <img id="img8" src={img8} alt="Goofy Goober Logo" ></img>
+    </div>
+
   </div>)
 }
 
