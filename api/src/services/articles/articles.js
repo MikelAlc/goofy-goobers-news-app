@@ -38,7 +38,7 @@ export const getArticles = async ({ criteria, pageNumber}) => {
 
     for (let i=0; i<choices.length; i++){
       let response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${choices[i]}&pageSize=9&page=${pageNumber}&apiKey=7f867c25279c4ba79d18d1146c961de1`
+        `https://newsapi.org/v2/top-headlines?country=us&category=${choices[i]}&pageSize=3&page=${pageNumber}&apiKey=7f867c25279c4ba79d18d1146c961de1`
       )
 
       let json = await response.json()
