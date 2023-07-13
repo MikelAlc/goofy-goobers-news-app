@@ -21,16 +21,21 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <div> <img src="img/sponge.jpeg" alt="No Results"/> </div>
 
 export const Failure = ({ error }) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
 export const Success = ({ output }) => {
+
+
   let articles = output.articles
   let sortedArticles = [...articles]
   const articleDivs = []
+  console.log(sortedArticles)
+
+
 
   const compareDates = (a, b) => {
     const aDate = new Date(a.publishedAt)
@@ -47,17 +52,23 @@ export const Success = ({ output }) => {
   articles = sortedArticles
 
   let lastTitle=""
+  let count=0
 
   for (let i = 0; i < articles.length; i++) {
     if (articles[i].title && articles[i].author &&  // only inlude articles that have all fields
         articles[i].publishedAt && articles[i].urlToImage && articles[i].content){
-
+            count++
       if(lastTitle==articles[i].title) continue
 
       lastTitle=articles[i].title
 
+
       const dateObj = new Date(articles[i].publishedAt)
-      const dateString = (dateObj.getMonth()+1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+
+      const minutes = dateObj.getMinutes();
+      const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+      const dateString = (dateObj.getMonth()+1) + "/" + dateObj.getDate() + "/" + dateObj.getFullYear() +" " + dateObj.getHours() +":" + formattedMinutes
 
       //console.log(articles[i])
       articleDivs.push(
@@ -66,16 +77,21 @@ export const Success = ({ output }) => {
           <img className='article-img' src={articles[i].urlToImage} width={"500"} height={"250"}></img>
           <div className='article-img-overlay'></div>
           <p className='article-title'>{articles[i].title.split(" - ")[0]}</p>
-          <p className='article-author-time'>{articles[i].author.substring(0, 32) + "..."} — {dateString} — {articles[i].category.charAt(0).toUpperCase() + articles[i].category.slice(1)}</p>
+          <p className='article-author-time'>{articles[i].author.substring(0, 20) + "..."} — {dateString} {articles[i].category.charAt(0).toUpperCase() + articles[i].category.slice(1)}</p>
           <p className='article-preview'>{articles[i].content.substring(0, 150) + "..."}</p>
         </div>
       </a>
       )
 
     }
+
+    //console.log(count)
   }
 
 
+  if(articleDivs.length<1){
+    return <div align="center"><img src="img/sponge.jpeg" alt="No Results" /></div>
+  }
 
   //  react can display an array of components
   return <div className="articles-cell">{articleDivs}</div>

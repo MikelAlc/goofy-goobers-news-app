@@ -21,6 +21,7 @@ const Routes = () => {
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Route path="/" page={LandingPage} name="landing" />
       <Private unauthenticated="landing">
+        <Route path="/puzzle8" page={Puzzle8Page} name="puzzle8" />
         <Route path="/settings" page={SettingsPage} name="settings" />
       </Private>
       <Set wrap={NewsLayout}>
