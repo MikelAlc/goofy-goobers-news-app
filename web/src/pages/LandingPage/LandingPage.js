@@ -217,7 +217,7 @@ const LandingPage = () => {
         </div>
       ) : (
         (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate)}/>) || (
-          <ArticlesCell criteria={getUserPrefs()} pageNumber={1} />
+          <ArticlesCell criteria={getUserPrefs()} pageNumber={parseInt(pstate)} />
         )
       )}
 
