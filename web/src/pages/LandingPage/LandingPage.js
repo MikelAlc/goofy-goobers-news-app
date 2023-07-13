@@ -2,13 +2,16 @@ import { useState } from 'react'
 
 import logo from 'web/public/img/pub_logos.png'
 
-import { Label, NumberField, ButtonField, Form, TextField, Submit, FormProvider, useForm } from '@redwoodjs/forms'
+import { Label, NumberField, ButtonField, Form, TextField, Submit } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 
 import { useAuth } from 'src/auth'
 import ArticlesCell from 'src/components/ArticlesCell'
+import {Dropdown, Button, ButtonGroup} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const LandingPage = () => {
@@ -16,34 +19,6 @@ const LandingPage = () => {
   const [state, changeState] = useState()
   const [pstate, pchangeState] = useState(1)
   //var pageNum=1;
-
-  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
-  const [advancedSearchData, setAdvancedSearchData] = useState({
-    query:'',
-    operator: 'OR',
-    operator: 'AND',
-    operator: 'NOT',
-    sortByYear: false,
-    year: '',
-  });
-
-  const methods = useForm({ mode: 'onBlur' });
-
-  const toggleAdvancedSearch = () => {
-    setShowAdvancedSearch(!showAdvancedSearch);
-  };
-
-  const handleAdvancedSearchChange = (event) => {
-    const { name, value } = event.target;
-    setAdvancedSearchData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-const handleAdvancedSearchSubmit = (data) => {
-    data.preventDefault();
-    console.log('Advanced Search: ', advancedSearchData);
-  };
 
   const onSubmit = (data) => {
     const hasEvenParentheses = /^([^()]*\([^()]*\))*[^()]*$/.test(input)
@@ -54,6 +29,28 @@ const handleAdvancedSearchSubmit = (data) => {
     console.log(data)
     changeState(data.input)
   }
+
+  const handleSearch = () => {
+    console.log('search');
+  };
+
+  const [sortBy, setSortBy] = useState(null);
+
+  const handleSortByAuthor = () => {
+    setSortBy('author');
+  };
+
+  const handleSortByDate = () => {
+    setSortBy('date');
+  };
+
+  const handleSortBySource = () => {
+    setSortBy('source');
+  };
+
+  const handleSortByKeyword = () => {
+    setSortBy('keyword');
+  };
 
   const setCategory = (event) => {
     // switch category, select proper tab
@@ -132,42 +129,28 @@ const handleAdvancedSearchSubmit = (data) => {
             <img id="logo" src={logo} alt="Goofy Goober Logo"></img>
           </Link>
         </div>
-        <FormProvider {...methods}>
         <div className="form-container">
           <div>
             <Form className="form-inline" onSubmit={onSubmit}>
               <TextField name="input" className="text-field" />
-              <Submit className={`rw-button rw-button-blue ${showAdvancedSearch ? 'advanced-search-active' : ''}`}
-              onMouseEnter={() => setShowAdvancedSearch(true)}
-              onMouseLeave={() => setShowAdvancedSearch(false)}>
-              Search
-              <span className={`up-arrow ${showAdvancedSearch ? 'show-arrow' : ''}`}>&#9650;</span>
-             </Submit>
-             {showAdvancedSearch && (
-          <div className="advanced-search-overlay">
-            <div className="advanced-serach-modal">
-            <form onSubmit={handleAdvancedSearchSubmit}>
-              {/* ... advanced search form fields */}
-              <TextField
-                name="query"
-                value={advancedSearchData.query}
-                onChange={handleAdvancedSearchChange}
-                placeholder="Search"
 
-              />
-              <Submit className="rw-button rw-button-blue">Advanced Search </Submit>
+            <Dropdown as={ButtonGroup}>
+            <Button type="submit" className="rw-button rw-button-blue">Search</Button>
 
-            </form>
-            </div>
+
+
+            <Dropdown.Toggle split variant="primary" id="split-button"/>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={handleSortByAuthor}>Sort by Author</Dropdown.Item>
+                  <Dropdown.Item onClick={handleSortByDate}>Sort by Date</Dropdown.Item>
+                  <Dropdown.Item onClick={handleSortBySource}>Sort by Source</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={handleSortByKeyword}>Sort by Keyword</Dropdown.Item>
+               </Dropdown.Menu>
+            </Dropdown>
+
+          </Form>
           </div>
-        )}
-            </Form>
-          </div>
-
-        </div>
-      </FormProvider>
-        <div>
-
           <div className="flex-end">
             {isAuthenticated ? (
               <div className="flex-end">
