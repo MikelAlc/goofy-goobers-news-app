@@ -1,4 +1,4 @@
-export const getArticles = async ({ criteria, pageNumber}) => {
+export const getArticles = async ({ criteria, pageNumber, sortBy}) => {
 
 
 
@@ -73,6 +73,15 @@ export const getArticles = async ({ criteria, pageNumber}) => {
     }));
     totalResults = json.totalResults
   }
+
+  if (sortBy === 'author') {
+    articles.sort((a, b) => a.author.localeCompare(b.author));
+  } else if (sortBy === 'date') {
+    articles.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+  } else if (sortBy === 'source') {
+    articles.sort((a, b) => a.source.name.localeCompare(b.source.name));
+  }
+
 
 
 

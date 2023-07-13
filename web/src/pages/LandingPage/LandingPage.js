@@ -9,6 +9,10 @@ import { MetaTags } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 import ArticlesCell from 'src/components/ArticlesCell'
+import {Dropdown, Button, ButtonGroup} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 const LandingPage = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
@@ -24,6 +28,28 @@ const LandingPage = () => {
     console.log(data)
     changeState(data.input)
   }
+
+  const handleSearch = () => {
+    console.log('search');
+  };
+
+  const [sortBy, setSortBy] = useState(null);
+
+  const handleSortByAuthor = () => {
+    setSortBy('author');
+  };
+
+  const handleSortByDate = () => {
+    setSortBy('date');
+  };
+
+  const handleSortBySource = () => {
+    setSortBy('source');
+  };
+
+  const handleSortByKeyword = () => {
+    setSortBy('keyword');
+  };
 
   const setCategory = (event) => {
     // switch category, select proper tab
@@ -108,9 +134,26 @@ const LandingPage = () => {
         <div className="form-container">
           <div>
             <Form className="form-inline" onSubmit={onSubmit}>
-              <TextField name="input" className="text-field" />
-              <Submit className="rw-button rw-button-blue">Search</Submit>
-            </Form>
+
+              <TextField name="input" className="text-field" style={{ border: '1px solid #8e51e4' }} />
+
+            <Dropdown as={ButtonGroup}>
+            <Button type="submit" className="rw-button rw-button-blue">Search</Button>
+
+
+
+            <Dropdown.Toggle split variant="primary" id="split-button"/>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={handleSortByAuthor}>Sort by Author</Dropdown.Item>
+                  <Dropdown.Item onClick={handleSortByDate}>Sort by Date</Dropdown.Item>
+                  <Dropdown.Item onClick={handleSortBySource}>Sort by Source</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={handleSortByKeyword}>Sort by Keyword</Dropdown.Item>
+               </Dropdown.Menu>
+            </Dropdown>
+
+          </Form>
+
           </div>
           <div className="flex-end">
             {isAuthenticated ? (
@@ -187,6 +230,13 @@ const LandingPage = () => {
               </Link>
             </li>
             <li>
+            {isAuthenticated ? (
+                <Link to={routes.puzzle8()}>8-Puzzle</Link>
+              ) : (
+                <></>
+              )}
+            </li>
+            <li>
               {isAuthenticated ? (
                 <Link to={routes.settings()}>Settings</Link>
               ) : (
@@ -221,6 +271,7 @@ const LandingPage = () => {
       ) : (
         (state && <ArticlesCell criteria={state} pageNumber={parseInt(pstate)}/>) || (
           <ArticlesCell criteria={getUserPrefs()} pageNumber={parseInt(pstate)} />
+
         )
       )}
 

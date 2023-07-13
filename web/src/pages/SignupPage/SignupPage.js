@@ -37,6 +37,11 @@ const SignupPage = () => {
     usernameRef.current?.focus()
   }, [])
 
+  const handleConfirmPassowdChange = (event) =>
+  {
+    setConfirmPassword(event.target.value);
+  }
+
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
       toast.error('Passwords do not match')
@@ -145,13 +150,13 @@ const SignupPage = () => {
                       errorClassName="rw-input rw-input-error"
                       autoComplete="new-password"
                       value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      onChange={handleConfirmPassowdChange}
                       validation={{
                         required:true,
 
                         validate: {
                           matchesPreviousPassword: (value) => {
-                            if (value === confirmPassword) {
+                            if (value === password) {
                               console.log("Here")
                               return true
                             }
