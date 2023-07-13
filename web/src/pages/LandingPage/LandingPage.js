@@ -39,7 +39,7 @@ const LandingPage = () => {
 
     changeState(event.target.id) // the state will be the category itself, except 'home'
 
-    //need to reset page between categories - Josh
+    //need to reset page between tabs - Josh
     pchangeState(1);
   }
   const setPage = (event) => { //change pages
@@ -90,6 +90,9 @@ const LandingPage = () => {
 
     if (isAuthenticated) changeState(getUserPrefs())
     else changeState(null)
+
+    //need to reset page between tabs - Josh
+    pchangeState(1);
   }
 
   const userPreferences = getUserPrefs()
