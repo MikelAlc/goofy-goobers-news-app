@@ -30,6 +30,11 @@ describe('LandingPage', () => {
 
   })
 
+  it('displays page', async () => {
+    render(<LandingPage />)
+    expect(screen.getByText('Page 1')).toBeInTheDocument()
+    })
+
   it('displays search results correctly', async () => {
     render(<LandingPage />)
 
