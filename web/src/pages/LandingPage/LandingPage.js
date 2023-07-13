@@ -106,7 +106,7 @@ const LandingPage = () => {
         <div className="form-container">
           <div>
             <Form className="form-inline" onSubmit={onSubmit}>
-              <TextField name="input" className="text-field" />
+              <TextField name="input" className="text-field" style={{ border: '1px solid #8e51e4' }} />
               <Submit className="rw-button rw-button-blue">Search</Submit>
             </Form>
           </div>
@@ -183,6 +183,13 @@ const LandingPage = () => {
               >
                 Technology
               </Link>
+            </li>
+            <li>
+            {isAuthenticated ? (
+                <Link to={routes.puzzle8()}>8-Puzzle</Link>
+              ) : (
+                <></>
+              )}
             </li>
             <li>
               {isAuthenticated ? (

@@ -1,25 +1,14 @@
-import { render, screen } from '@redwoodjs/testing/web'
+import { render } from '@redwoodjs/testing/web'
 
-import NewsLayout from './NewsLayout'
+import Puzzle8Page from './Puzzle8Page'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
-
-describe('NewsLayout', () => {
+describe('Puzzle8Page', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<NewsLayout />)
+      render(<Puzzle8Page />)
     }).not.toThrow()
   })
-
-
-
-
-
-
-
-
-
-
 })
